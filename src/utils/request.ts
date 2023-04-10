@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { HeadersDefaults, AxiosRequestConfig } from 'axios'
 import { message } from 'antd'
 
-const BASE_URL = '/api'
+const BASE_URL = ''
 // 添加额外的头部配置
 interface Header extends HeadersDefaults {
   'Content-Type': string
@@ -10,13 +10,13 @@ interface Header extends HeadersDefaults {
 }
 (axios.defaults.headers as Header)['Content-Type'] = 'application/json'
 
-// 返回数据格式
-interface Response<T> {
-  status: number
-  data: T
-  msg: string
-  success: boolean
-}
+// // 返回数据格式
+// interface Response<T> {
+//   status: number
+//   data: T
+//   msg: string
+//   success: boolean
+// }
 
 const service = axios.create({
   baseURL: BASE_URL,
@@ -63,10 +63,9 @@ function handleErrorCode (status: number, stat: string, msg: string) {
 // 请求函数
 async function request<T> (option: AxiosRequestConfig) {
   try {
-    const res = await service.request<Response<T>>({
+    const res = await service.request<T>({
       ...option
     })
-    console.log(res)
     return res.data
   } catch (error) {
     return undefined

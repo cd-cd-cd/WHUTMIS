@@ -28,7 +28,8 @@ module.exports = {
     "@typescript-eslint/prefer-optional-chain": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
-    "@typescript-eslint/no-confusing-void-expression": "off"
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/await-thenable": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest",

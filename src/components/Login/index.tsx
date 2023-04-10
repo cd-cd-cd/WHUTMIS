@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginTopImg from '../../assets/imgs/log_top.jpg'
 import LoginBottomImg from '../../assets/imgs/login_foot.jpg'
 import style from './index.module.scss'
@@ -6,18 +6,35 @@ import { Button, Form, Input } from 'antd'
 import { getCaptcha } from '../../api/common/login'
 interface Props {
   title: string
+  loginApi: (
+    username: string,
+    password: string,
+    key: string,
+    code: string
+  ) => void
 }
-export default function Login ({ title }: Props) {
-  const [form] = Form.useForm()
 
-  const loginClick = (values: any) => {
-    console.log(values)
+interface IValue {
+  username: string
+  password: string
+  identifyCode: string
+}
+export default function Login ({ title, loginApi }: Props) {
+  const [form] = Form.useForm()
+  const [captchaImg, setCaptchaImg] = useState<string>('')
+  const [key, setKey] = useState<string>('')
+
+  const loginClick = async (values: IValue) => {
+    const res = await loginApi(values.username, values.password, key, values.identifyCode)
   }
 
   // 得到验证码
   const getIdentifyCode = async () => {
     const res = await getCaptcha()
-    console.log(res)
+    if (res) {
+      setCaptchaImg(res?.captchaImg)
+      setKey(res.key)
+    }
   }
 
   useEffect(() => {
@@ -70,8 +87,8 @@ export default function Login ({ title }: Props) {
               <Form.Item
               >
                 <div className={style.identify_box}>
-                  <div className={style.img_box}></div>
-                  <a>刷新</a>
+                  <img src={captchaImg} className={style.img_box}></img>
+                  <a onClick={() => getIdentifyCode()}>刷新</a>
                 </div>
               </Form.Item>
                 <div className={style.btn_box}>

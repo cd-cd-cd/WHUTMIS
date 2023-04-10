@@ -2,6 +2,7 @@
   "name": "whut_mis",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:8000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -54,5 +55,5 @@
     "eslint-plugin-react": "^7.32.2",
     "typescript": "^5.0.4"
   },
-  "proxy": "http://82.157.50.91:9000"
+  "proxy": "http://82.157.50.91:8080"
 }
