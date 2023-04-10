@@ -1,0 +1,78 @@
+.back {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.topImg {
+  height: 100px;
+  display: block;
+}
+
+.middle {
+  flex: 1;
+  background-image: url('../../assets/imgs/loginBgm.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+}
+
+.left_box {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .topTitle {
+    font-size: 25pt;
+    font-family: 黑体;
+    font-weight: 700;
+  }
+
+  .bottomTitle {
+    font-size: 20pt;
+    font-family: 黑体;
+    font-weight: 700;
+  }
+}
+
+.right_box{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.form_box{
+  width: 500px;
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 40px 10px 20px 10px;
+}
+
+.bottom {
+  height: 100px;
+  display: block;
+}
+
+.identify_box{
+  display: flex;
+  margin-left: 100px;
+  align-items: flex-end;
+}
+
+.btn_box{
+  margin-left: 100px;
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img_box{
+  width: 120px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: gray;
+}
