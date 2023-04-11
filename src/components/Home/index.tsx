@@ -13,8 +13,9 @@ import { type IRole } from '../../libs/data'
 interface Props {
   role: IRole
   menuData: ITabBarCommon[]
+  logoutApi: (id: string | null) => Promise<unknown>
 }
-export default function Home ({ role, menuData }: Props) {
+export default function Home ({ role, menuData, logoutApi }: Props) {
   const navigator = useNavigate()
   const { returnMenuData, onClickMenu } = useMenu()
   const { addTabBar } = useTabBar()
@@ -24,6 +25,17 @@ export default function Home ({ role, menuData }: Props) {
   const onClick: MenuProps['onClick'] = e => {
     const index = Number(e.key)
     onClickMenu(index, menuData)
+  }
+
+  const logoutClick = async () => {
+    const id = localStorage.getItem('id')
+    // if (id) {
+    const res = await logoutApi(id)
+    if (res) {
+      console.log(res)
+      localStorage.clear()
+      // }
+    }
   }
 
   useEffect(() => {
@@ -43,8 +55,8 @@ export default function Home ({ role, menuData }: Props) {
       <header className={style.header}>
         <img src={HeaderLeftIcon} className={style.leftIcon}></img>
         <div className={style.rightBox}>
-          <img src={LogoutIcon} className={style.logoutIcon}></img>
-          <div className={style.logoutText}>注销</div>
+          <img src={LogoutIcon} className={style.logoutIcon} onClick={() => logoutClick()}></img>
+          <div className={style.logoutText} onClick={() => logoutClick()}>注销</div>
         </div>
       </header>
       <main className={style.middle}>

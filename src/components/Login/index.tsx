@@ -42,13 +42,16 @@ export default function Login ({ title, loginApi, role }: Props) {
       message.success('登陆成功!')
       switch (role) {
         case -1:
+          localStorage.setItem('id', values.username)
           navigator('/admin')
           break
         case 0:
+          localStorage.setItem('id', values.username)
           navigator('/main')
           break
         case 1:
           console.log('还没写')
+          localStorage.setItem('username', values.username)
           break
       }
     }
@@ -99,7 +102,7 @@ export default function Login ({ title, loginApi, role }: Props) {
                   { min: 6, max: 20, message: '长度为6-20位' }
                 ]}
               >
-                <Input placeholder='请输入密码'></Input>
+                <Input.Password placeholder='请输入密码'></Input.Password>
               </Form.Item>
               <Form.Item
                 label='验证码'

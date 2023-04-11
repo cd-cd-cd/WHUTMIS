@@ -15,6 +15,7 @@ import { StoreProvider } from './hooks/store'
 import AdminHome from './pages/Home/AdminHome'
 import BasicInfo from './pages/Main/AdminMain/BasicInfo'
 import StuInfo from './pages/Main/AdminMain/StuInfo'
+import Unknown from './pages/Unknow'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
@@ -48,6 +49,7 @@ function App () {
             <Route path='basicInfo' element={<BasicInfo/>}></Route>
             <Route path='stuInfo' element={<StuInfo/>}></Route>
           </Route>
+          <Route path='/404' element={<Unknown/>}></Route>
         </Routes>
       </BrowserRouter>
     </StoreProvider>

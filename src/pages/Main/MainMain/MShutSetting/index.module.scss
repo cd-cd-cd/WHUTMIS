@@ -1,0 +1,56 @@
+.box {
+  width: 95%;
+  padding: 10px;
+  box-shadow: var(--box-shadow);
+  color: var(--box-Color);
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.back {
+  padding: 20px;
+}
+
+.title_text {
+  font-weight: var(--box-fontWeight);
+}
+
+.main {
+  padding: 10px 20px 10px 70px;
+}
+
+.funBox {
+  display: flex;
+  align-items: center;
+}
+
+
+.Input {
+  width: 300px;
+  margin-right: 10px;
+}
+
+.input {
+  width: 300px;
+}
+
+.btn_box{
+  position: absolute;
+  margin-left: 405px;
+  margin-top: -56px;
+  width: 200px;
+}
+
+.submitBtn{
+  margin-right: 5px;
+}
+
+.warnText{
+  color: var(--warn-color);
+  font-size: 12px;
+  margin-left: 20px;
+}
+
+.timeLabel{
+  margin-right: 5px;
+}
