@@ -5,6 +5,7 @@ import style from './index.module.scss'
 import { Button, Form, Input, message } from 'antd'
 import { getCaptcha } from '../../api/common/login'
 import { type IRole } from '../../libs/data'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   title: string
@@ -19,6 +20,7 @@ interface IValue {
   identifyCode: string
 }
 export default function Login ({ title, loginApi, role }: Props) {
+  const navigator = useNavigate()
   const [form] = Form.useForm()
   const [captchaImg, setCaptchaImg] = useState<string>('')
   const [key, setKey] = useState<string>('')
@@ -38,6 +40,17 @@ export default function Login ({ title, loginApi, role }: Props) {
       const token = res
       localStorage.setItem('token', token)
       message.success('登陆成功!')
+      switch (role) {
+        case -1:
+          navigator('/admin')
+          break
+        case 0:
+          navigator('/main')
+          break
+        case 1:
+          console.log('还没写')
+          break
+      }
     }
   }
 
