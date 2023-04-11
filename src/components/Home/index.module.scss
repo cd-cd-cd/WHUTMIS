@@ -1,0 +1,54 @@
+.header {
+  height: 68px;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-image: url('../../assets/imgs/admin_top.jpg');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.logoutIcon {
+  width: 30px;
+  cursor: pointer;
+}
+
+.rightBox {
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px;
+}
+
+.logoutText {
+  color: #fff;
+  cursor: pointer;
+}
+
+.middle{
+  flex: 1;
+}
+
+.footer {
+  height: 40px;
+  width: 100%;
+  background-color: #135e7f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.middle{
+  display: flex;
+}
+
+.right{
+  flex: 1;
+}

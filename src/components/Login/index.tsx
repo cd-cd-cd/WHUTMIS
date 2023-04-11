@@ -4,6 +4,7 @@ import LoginBottomImg from '../../assets/imgs/login_foot.jpg'
 import style from './index.module.scss'
 import { Button, Form, Input, message } from 'antd'
 import { getCaptcha } from '../../api/common/login'
+import { type IRole } from '../../libs/data'
 
 interface Props {
   title: string

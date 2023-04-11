@@ -1,0 +1,50 @@
+.btnBack{
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgb(58 58 58 / 7%);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
+.deleteIcon{
+  width: 10PX;
+  display: inline-block;
+  position: absolute;
+  margin-right: 5px;
+  right: 2px;
+  top: 6.5px;
+  transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@mixin baseBtn {
+  width: 130px;
+  height: 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  margin-right: 5px;
+  position: relative;
+  text-align: center;
+  border: 1px solid;
+}
+
+.button{
+  @include baseBtn();
+  background-color: #fff;
+  border-color: var(--tabBorder-color);
+  color: var(--tabBar-textColor);
+}
+
+.button_click{
+  background-color: var(--tabClick-backColor);
+  border-color: var(--tabClickBorder-color);
+  color: #fff;
+  @include baseBtn();
+}
+
+.button:hover{
+  background-color: var(--tabClick-backColor);
+  border-color: var(--tabClickBorder-color);
+  color: #fff;
+}

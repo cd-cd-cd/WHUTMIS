@@ -1,7 +1,11 @@
 import React from 'react'
+import Home from '../../../components/Home'
+import { adminMenu } from '../../../libs/data'
 
-export default function AdminHome () {
+export default function MainHome () {
   return (
-    <div>AdminHome </div>
+    <>
+      <Home role={-1} menuData={adminMenu}></Home>
+    </>
   )
 }
