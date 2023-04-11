@@ -6,7 +6,7 @@ export default function StudentLogin () {
   const title = '学生端'
   return (
     <div>
-      <Login title={title} loginApi={studentLogin}></Login>
+      <Login title={title} loginApi={studentLogin} role={1}></Login>
     </div>
   )
 }

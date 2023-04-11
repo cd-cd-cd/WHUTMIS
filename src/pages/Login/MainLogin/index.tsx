@@ -7,6 +7,6 @@ export default function AdminLogin () {
     return <div></div>
   }
   return (
-    <Login title={title} loginApi={mainLogin}></Login>
+    <Login title={title} loginApi={mainLogin} role={0}></Login>
   )
 }

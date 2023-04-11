@@ -6,7 +6,7 @@ export default function SuperLogin () {
   const title = '管理员端'
   return (
     <div>
-      <Login title={title} loginApi={adminLogin}></Login>
+      <Login title={title} loginApi={adminLogin} role={-1}></Login>
     </div>
   )
 }

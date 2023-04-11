@@ -2,21 +2,13 @@ import axios from 'axios'
 import type { HeadersDefaults, AxiosRequestConfig } from 'axios'
 import { message } from 'antd'
 
-const BASE_URL = ''
+const BASE_URL = 'http://82.157.50.91:8080'
 // 添加额外的头部配置
 interface Header extends HeadersDefaults {
   'Content-Type': string
   'Authorization': string
 }
 (axios.defaults.headers as Header)['Content-Type'] = 'application/json'
-
-// // 返回数据格式
-// interface Response<T> {
-//   status: number
-//   data: T
-//   msg: string
-//   success: boolean
-// }
 
 const service = axios.create({
   baseURL: BASE_URL,
@@ -37,12 +29,12 @@ service.interceptors.response.use(res => {
   return res
 }, error => {
   const { status } = error.response
-  const { stat, message } = error.response.data
-  return handleErrorCode(status, stat, message)
+  const message = error.response.data
+  return handleErrorCode(status, message)
 })
 
 // 处理错误代码
-function handleErrorCode (status: number, stat: string, msg: string) {
+function handleErrorCode (status: number, msg: string) {
   switch (status) {
     case 400:
     case 401:
@@ -51,11 +43,11 @@ function handleErrorCode (status: number, stat: string, msg: string) {
     case 405:
     case 500: {
       message.error(msg)
-      return Promise.reject(stat)
+      return Promise.reject(status)
     }
     default: {
       message.error('请求出错')
-      return Promise.reject(stat)
+      return Promise.reject(status)
     }
   }
 }

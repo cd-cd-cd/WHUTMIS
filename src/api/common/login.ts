@@ -12,57 +12,29 @@ export const getCaptcha = async () => {
   })
 }
 
-// 学生登录
-export const studentLogin = async (
-  username: string,
-  password: string,
-  key: string,
-  code: string
-) => {
-  return await request({
-    url: '/student/login',
+// 主管理员登录
+export const mainLogin = async (data: FormData) => {
+  return await request<string>({
+    url: '/main/login',
     method: 'POST',
-    data: {
-      username,
-      password,
-      key,
-      code
-    }
+    data
   })
 }
 
 // 普通管理员登录
-export const adminLogin = async (
-  username: string,
-  password: string,
-  key: string,
-  code: string) => {
-  return await request({
+export const adminLogin = async (data: FormData) => {
+  return await request<string>({
     url: '/admin/login',
     method: 'POST',
-    data: {
-      username,
-      password,
-      key,
-      code
-    }
+    data
   })
 }
 
-// 主管理员登录
-export const mainLogin = async (
-  username: string,
-  password: string,
-  key: string,
-  code: string) => {
-  return await request({
-    url: '/main/login',
+// 学生登录
+export const studentLogin = async (data: FormData) => {
+  return await request<string>({
+    url: '/student/login',
     method: 'POST',
-    data: {
-      username,
-      password,
-      key,
-      code
-    }
+    data
   })
 }

@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react'
 import LoginTopImg from '../../assets/imgs/log_top.jpg'
 import LoginBottomImg from '../../assets/imgs/login_foot.jpg'
 import style from './index.module.scss'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 import { getCaptcha } from '../../api/common/login'
+
 interface Props {
   title: string
-  loginApi: (
-    username: string,
-    password: string,
-    key: string,
-    code: string
-  ) => void
+  loginApi: (data: FormData
+  ) => Promise<string | undefined>
+  role: IRole
 }
 
 interface IValue {
@@ -19,13 +17,27 @@ interface IValue {
   password: string
   identifyCode: string
 }
-export default function Login ({ title, loginApi }: Props) {
+export default function Login ({ title, loginApi, role }: Props) {
   const [form] = Form.useForm()
   const [captchaImg, setCaptchaImg] = useState<string>('')
   const [key, setKey] = useState<string>('')
 
   const loginClick = async (values: IValue) => {
-    const res = await loginApi(values.username, values.password, key, values.identifyCode)
+    const data = new FormData()
+    if (role === 1) {
+      data.append('username', values.username)
+    } else {
+      data.append('id', values.username)
+    }
+    data.append('password', values.password)
+    data.append('key', key)
+    data.append('code', values.identifyCode)
+    const res = await loginApi(data)
+    if (res) {
+      const token = res
+      localStorage.setItem('token', token)
+      message.success('登陆成功!')
+    }
   }
 
   // 得到验证码
