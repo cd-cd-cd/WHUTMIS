@@ -20,3 +20,17 @@ export const adminMenu: ITabBarCommon[] = [
   { label: '基本信息', value: 0, name: 'basicInfo' },
   { label: '学生基本志愿', value: 1, name: 'stuInfo' }
 ]
+
+export interface ITableData {
+  key: number
+  major: string
+  num: number
+}
+
+export const majorTableData: ITableData[] = [
+  { key: 0, major: '信管', num: 40 },
+  { key: 1, major: '信管', num: 40 },
+  { key: 2, major: '信管', num: 40 },
+  { key: 3, major: '信管', num: 40 },
+  { key: 4, major: '信管', num: 40 }
+]

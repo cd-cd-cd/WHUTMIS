@@ -1,0 +1,25 @@
+.func_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label{
+  font-weight: 700;
+  color: dimgray;
+  margin-right: 5px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  margin: 3px 10px;
+}
+
+
+.file_func {
+  display: flex;
+  width: 220px;
+  justify-content: space-between;
+  margin-right: 20px;
+}

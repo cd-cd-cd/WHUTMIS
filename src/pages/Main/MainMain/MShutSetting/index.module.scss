@@ -54,3 +54,40 @@
 .timeLabel{
   margin-right: 5px;
 }
+
+.time_btn{
+  margin-left: 10px;
+}
+
+.warn_time_text{
+  color: var(--warn-color);
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.table{
+  width: 65%;
+  margin: 0 auto 10px auto;
+}
+
+.table {
+  :global {
+    .ant-table-tbody>tr>td {
+      padding: 12px;
+    }
+
+    .ant-table-thead>tr>th {
+      padding: 10px;
+    }
+  }
+}
+
+.modalText {
+  color: var(--normal-text-color);
+  margin-top: -5px;
+  margin-bottom: 12px;
+}
+
+.numberInput{
+  width: 90%;
+}
