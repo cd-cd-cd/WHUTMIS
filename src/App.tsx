@@ -16,6 +16,9 @@ import AdminHome from './pages/Home/AdminHome'
 import BasicInfo from './pages/Main/AdminMain/BasicInfo'
 import StuInfo from './pages/Main/AdminMain/StuInfo'
 import Unknown from './pages/Unknow'
+import StuHome from './pages/Home/StuHome'
+import StudentHome from './pages/Student/StudentHome'
+import Wish from './pages/Student/Wish'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
@@ -48,6 +51,10 @@ function App () {
           <Route path='admin' element={<AdminHome/>}>
             <Route path='basicInfo' element={<BasicInfo/>}></Route>
             <Route path='stuInfo' element={<StuInfo/>}></Route>
+          </Route>
+          <Route path='student' element={<StuHome/>}>
+            <Route path='home' element={<StudentHome/>}></Route>
+            <Route path='wish' element={<Wish/>}></Route>
           </Route>
           <Route path='/404' element={<Unknown/>}></Route>
         </Routes>

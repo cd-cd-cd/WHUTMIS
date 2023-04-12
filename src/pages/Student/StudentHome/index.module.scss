@@ -1,0 +1,27 @@
+.showBoard{
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.title{
+  font-weight: 700;
+  color: var(--board-title-color);
+}
+
+.info{
+  width: 55%;
+  margin: 0 auto;
+}
+
+.func_box{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.changePasswordInput{
+  width: 220px;
+  margin: 0 10px;
+}

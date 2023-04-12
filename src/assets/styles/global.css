@@ -15,4 +15,8 @@
   --warn-color: red;
 
   --normal-text-color: #606266;
+
+  /*student*/
+  --board-title-color: gray;
+  --major-back-color: hsla(0,0%,70%,.1);
 }

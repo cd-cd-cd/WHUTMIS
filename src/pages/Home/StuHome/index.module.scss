@@ -1,0 +1,51 @@
+.back{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header{
+
+  .top{
+    width: 100%;
+    height: 40px;
+    background-color: #096dd9;
+  }
+}
+
+.logo_box{
+  display: flex;
+  align-items: center;
+}
+
+.textLogo{
+  height: 75px;
+}
+
+.logo{
+  height: 90px;
+}
+
+.top{
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  padding-right: 15px;
+}
+
+.logoutIcon{
+  width: 30px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.logout_text{
+  color: #fff;
+  font-weight: 700;
+}
+
+.warnText{
+  color: var(--warn-color);
+  text-align: end;
+  margin: 3px 0;
+}
+
