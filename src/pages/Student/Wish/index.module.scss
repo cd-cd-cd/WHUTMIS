@@ -45,3 +45,26 @@
   padding-right: 10px;
   color: dimgray;
 }
+
+.bottom {
+  align-items: center;
+}
+
+.warn_text{
+  padding: 20px 0 10px 0;
+  color: var(--warn-color);
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn_box{
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.saveBottom{
+  align-items: center;
+  text-align: center;
+}

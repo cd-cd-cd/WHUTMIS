@@ -1,0 +1,44 @@
+.box{
+  width: 95%;
+  padding: 10px;
+  box-shadow: var(--box-shadow);
+  color: var(--box-Color);
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.back{
+  padding: 20px;
+}
+
+.title_text{
+  font-weight: var(--box-fontWeight);
+}
+
+.main{
+  padding: 10px 20px 10px 100px;
+}
+
+.basicInfo{
+  margin-bottom: 5px;
+}
+
+.funBox{
+  display: flex;
+  align-items: center;
+}
+
+.passwordInput{
+  width: 240px;
+  margin: 0 10px;
+}
+
+.text{
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.Input{
+  width: 300px;
+  margin-right: 10px;
+}
