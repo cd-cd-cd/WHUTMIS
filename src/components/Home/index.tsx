@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import style from './index.module.scss'
-import { Menu, type MenuProps } from 'antd'
+import { Menu, message, type MenuProps } from 'antd'
 import { Outlet, useNavigate } from 'react-router-dom'
 import TabBar from '../TabBar'
 import useMenu from '../../hooks/useMenu'
@@ -8,7 +8,7 @@ import useTabBar from '../../hooks/useTabBar'
 import { context } from '../../hooks/store'
 import HeaderLeftIcon from '../../assets/imgs/admin_top.png'
 import LogoutIcon from '../../assets/imgs/logout.png'
-import { type IRole } from '../../libs/data'
+import { type IRole, type ITabBarCommon } from '../../libs/model'
 
 interface Props {
   role: IRole
@@ -29,12 +29,17 @@ export default function Home ({ role, menuData, logoutApi }: Props) {
 
   const logoutClick = async () => {
     const id = localStorage.getItem('id')
-    // if (id) {
     const res = await logoutApi(id)
-    if (res) {
-      console.log(res)
-      localStorage.clear()
-      // }
+    // Because of no response to judge
+    if (typeof res !== 'undefined') {
+      message.success('退出成功')
+    }
+    if (role === 0) {
+      navigator('/mainLogin')
+    } else if (role === -1) {
+      navigator('/adminLogin')
+    } else {
+      navigator('/404')
     }
   }
 

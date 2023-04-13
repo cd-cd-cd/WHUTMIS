@@ -38,22 +38,6 @@ function handleErrorCode (status: number, msg: string) {
   switch (status) {
     case 401: {
       message.error(msg)
-      // const role = localStorage.getItem('role')
-      // console.log(role)
-      // switch (role) {
-      //   case '-1':
-      //     window.location.href = '/adminLogin'
-      //     break
-      //   case '0':
-      //     window.location.href = '/mainLogin'
-      //     break
-      //   case '1':
-      //     window.location.href = '/studentLogin'
-      //     break
-      //   default:
-      //     window.location.href = '/404'
-      // }
-      // localStorage.clear()
       return Promise.reject(status)
     }
     case 400:

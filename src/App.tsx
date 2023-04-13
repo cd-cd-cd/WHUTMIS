@@ -19,6 +19,7 @@ import Unknown from './pages/Unknow'
 import StuHome from './pages/Home/StuHome'
 import StudentHome from './pages/Student/StudentHome'
 import Wish from './pages/Student/Wish'
+import { type ITabBarCommon } from './libs/model'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])

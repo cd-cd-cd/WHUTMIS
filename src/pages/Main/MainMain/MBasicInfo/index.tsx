@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import { Button, Input, Modal } from 'antd'
+import { Button, Input, Modal, message } from 'antd'
 import useValidator from '../../../../hooks/useValidator'
-import { changePassword } from '../../../../api/main'
+import { changePassword, deleteStudent, resetStuPassword } from '../../../../api/main'
+import { useNavigate } from 'react-router-dom'
 
 export default function MBasicInfo () {
+  const navigator = useNavigate()
   const { mainPasswordValidator, mainStuUsernameValidator } = useValidator()
   // 删除提醒
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -22,8 +24,10 @@ export default function MBasicInfo () {
         data.append('id', id)
         data.append('password', password)
         const res = await changePassword(data)
-        if (res) {
-          console.log(res)
+        if (typeof res !== 'undefined') {
+          message.success('密码修改成功!请重新登录')
+          localStorage.clear()
+          navigator('/mainLogin')
         }
       }
     }
@@ -37,8 +41,22 @@ export default function MBasicInfo () {
   }
 
   // 删除学号
-  const deleteStu = () => {
+  const deleteStu = async () => {
+    const res = await deleteStudent(deleteUsername)
     setIsModalOpen(false)
+    if (typeof res !== 'undefined') {
+      message.success('该学号学生已删除')
+      setDeleteUsername('')
+    }
+  }
+
+  // 重置学生密码
+  const initStuPassword = async () => {
+    const res = await resetStuPassword(username)
+    if (typeof res !== 'undefined') {
+      message.success('学生密码重置成功')
+      setUsername('')
+    }
   }
 
   return (
@@ -71,7 +89,7 @@ export default function MBasicInfo () {
               onChange={(e) => setUsername(e.target.value.trim())}
               value={username}
             ></Input>
-            <Button>初始化密码</Button>
+            <Button onClick={() => initStuPassword()}>初始化密码</Button>
           </div>
         </div>
       </div>
@@ -91,7 +109,7 @@ export default function MBasicInfo () {
         </div>
       </div>
       <Modal title="提醒" open={isModalOpen} onOk={() => deleteStu()} onCancel={() => setIsModalOpen(false)}>
-        确定删除该学号学生吗？
+        确定删除{deleteUsername}学号学生吗？
       </Modal>
     </div>
   )

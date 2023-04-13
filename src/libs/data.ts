@@ -1,9 +1,4 @@
-import { type MenuProps } from 'antd'
-
-// -1（admin） 0(main)  1(stu)
-export type IRole = -1 | 0 | 1
-
-export type MenuItem = Required<MenuProps>['items'][number]
+import { type ITabBarCommon } from './model'
 
 // main menuData
 export const mainMenu: ITabBarCommon[] = [

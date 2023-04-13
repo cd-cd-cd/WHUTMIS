@@ -1,7 +1,7 @@
-import { type MenuItem } from '../libs/data'
 import { context } from './store'
 import { useContext } from 'react'
 import useTabBar from './useTabBar'
+import { type MenuItem, type ITabBarCommon } from '../libs/model'
 
 export default function useMenu () {
   const { setTabBarId } = useContext(context)
