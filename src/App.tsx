@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes, useRoutes } from 'react-router-dom'
 import AdminLogin from './pages/Login/MainLogin'
 import SuperLogin from './pages/Login/AdminLogin'
 import StudentLogin from './pages/Login/StudentLogin'
@@ -36,7 +36,6 @@ function App () {
       setTabBarId
     }}
     >
-      <BrowserRouter>
         <Routes>
           <Route path='/mainLogin' element={<AdminLogin />}></Route>
           <Route path='/adminLogin' element={<SuperLogin />}></Route>
@@ -59,7 +58,6 @@ function App () {
           </Route>
           <Route path='/404' element={<Unknown/>}></Route>
         </Routes>
-      </BrowserRouter>
     </StoreProvider>
   )
 }

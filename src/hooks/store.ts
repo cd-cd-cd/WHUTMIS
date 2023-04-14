@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+import { type ITabBarCommon } from '../libs/model'
 
 interface StoreContext {
   // tabBar

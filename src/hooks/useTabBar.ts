@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { context } from './store'
+import { type ITabBarCommon } from '../libs/model'
 
 export default function useTabBar () {
   const { tabBarList, setTabBarList, setTabBarId, tabBarId } = useContext(context)

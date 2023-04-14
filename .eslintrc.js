@@ -29,7 +29,8 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
-    "@typescript-eslint/await-thenable": "off"
+    "@typescript-eslint/await-thenable": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest",

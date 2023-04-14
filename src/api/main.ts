@@ -31,15 +31,26 @@ export const deleteStudent = async (deleteUsername: string) => {
   })
 }
 
+export interface IColumnData {
+  title: string
+  key: string
+}
+
+interface IStuBasicInfo {
+  total: number
+  columnList: any[]
+  columnData: IColumnData[]
+}
+
 // 搜索学生功能（集成页面功能）
-export const stuBasicInfo = async (studentName: string, page: string, pageLen: string) => {
-  const data = new FormData()
-  data.append('studentName', '')
-  data.append('page', page)
-  data.append('pageLen', pageLen)
-  return await request({
+export const stuBasicInfo = async (studentName: string, page: number, pageLen: number) => {
+  return await request<IStuBasicInfo>({
     url: '/new/main/studentBaseInfo',
     method: 'POST',
-    data
+    params: {
+      studentName,
+      page,
+      pageLen
+    }
   })
 }
