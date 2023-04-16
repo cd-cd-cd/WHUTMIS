@@ -31,24 +31,27 @@ export const deleteStudent = async (deleteUsername: string) => {
   })
 }
 
-export interface IColumnData {
-  title: string
-  key: string
-}
-
-interface IStuBasicInfo {
-  total: number
-  columnList: any[]
-  columnData: IColumnData[]
-}
-
 // 搜索学生功能（集成页面功能）
 export const stuBasicInfo = async (studentName: string, page: number, pageLen: number) => {
-  return await request<IStuBasicInfo>({
+  return await request<string>({
     url: '/new/main/studentBaseInfo',
     method: 'POST',
     params: {
       studentName,
+      page,
+      pageLen
+    }
+  })
+}
+
+// 学生搜索（搜索、页面、未提交名单是同一个入口
+export const studentWishInfo = async (studentName: string, isNotSubmit: boolean, page: number, pageLen: number) => {
+  return await request<string>({
+    url: '/new/main/studentWishInfo',
+    method: 'POST',
+    params: {
+      studentName,
+      isNotSubmit,
       page,
       pageLen
     }

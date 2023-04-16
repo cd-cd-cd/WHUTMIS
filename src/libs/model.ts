@@ -10,3 +10,14 @@ export interface ITabBarCommon {
 export type IRole = -1 | 0 | 1
 
 export type MenuItem = Required<MenuProps>['items'][number]
+
+export interface IColumnData {
+  title: string
+  key: string
+}
+
+export interface IStuBasicInfo {
+  total: number
+  columnList: any[]
+  columnData: IColumnData[]
+}
