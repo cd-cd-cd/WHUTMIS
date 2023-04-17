@@ -145,3 +145,11 @@ export const wishResult = async (studentName: string, page: number, pageLen: num
     }
   })
 }
+
+// 获取自选字段
+export const getKey = async () => {
+  return await request({
+    url: '/new/main/getKey',
+    method: 'POST'
+  })
+}

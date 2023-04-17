@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Route, Routes, useRoutes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate, useRoutes } from 'react-router-dom'
 import AdminLogin from './pages/Login/MainLogin'
 import SuperLogin from './pages/Login/AdminLogin'
 import StudentLogin from './pages/Login/StudentLogin'
@@ -24,6 +24,7 @@ import { type ITabBarCommon } from './libs/model'
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
   const [tabBarId, setTabBarId] = useState(0)
+  const navigator = useNavigate()
   useEffect(() => {
     document.title = '武汉理工大学专业分流系统'
   }, [])
@@ -40,7 +41,7 @@ function App () {
           <Route path='/mainLogin' element={<AdminLogin />}></Route>
           <Route path='/adminLogin' element={<SuperLogin />}></Route>
           <Route path='/studentLogin' element={<StudentLogin />}></Route>
-          <Route path='main' element={<MainHome />}>
+          <Route path='main' element={localStorage.getItem('token') ? <MainHome /> : <AdminLogin />}>
             <Route path='MBasicInfo' element={<MBasicInfo />}></Route>
             <Route path='MStuInfo' element={<MStuInfo />}></Route>
             <Route path='MVolunteerInfo' element={<MVolunteerInfo />}></Route>
@@ -48,11 +49,11 @@ function App () {
             <Route path='MShutSetting' element={<MShutSetting />}></Route>
             <Route path='MShutRes' element={<MShutRes />}></Route>
           </Route>
-          <Route path='admin' element={<AdminHome/>}>
+          <Route path='admin' element={localStorage.getItem('token') ? <AdminHome/> : <SuperLogin />}>
             <Route path='basicInfo' element={<BasicInfo/>}></Route>
             <Route path='stuInfo' element={<StuInfo/>}></Route>
           </Route>
-          <Route path='student' element={<StuHome/>}>
+          <Route path='student' element={localStorage.getItem('token') ? <StuHome/> : <StudentLogin />}>
             <Route path='home' element={<StudentHome/>}></Route>
             <Route path='wish' element={<Wish/>}></Route>
           </Route>

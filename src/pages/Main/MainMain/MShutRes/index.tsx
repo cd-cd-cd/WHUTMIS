@@ -1,9 +1,9 @@
-import { Button, Input, Table } from 'antd'
+import { Button, Input, Modal, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { type IStuBasicInfo, type IColumnData } from '../../../../libs/model'
 import Column from 'antd/lib/table/Column'
-import { wishResult } from '../../../../api/main'
+import { getKey, wishResult } from '../../../../api/main'
 
 export default function MShutRes () {
   const [loading, setLoading] = useState(false)
@@ -13,6 +13,7 @@ export default function MShutRes () {
   const [stuName, setStuName] = useState('')
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<IColumnData[]>([])
+  const [isModal, setIsModal] = useState(false)
   const onSearch = async (value: string) => {
     setCurrent(1)
     setPageSize(20)
@@ -49,6 +50,18 @@ export default function MShutRes () {
     setStuName('')
   }
 
+  const clickOpenModal = async () => {
+    setIsModal(true)
+    // const res = await getKey()
+    // if (res) {
+    //   console.log(res)
+    // }
+  }
+
+  const closeModal = () => {
+    setIsModal(false)
+  }
+
   useEffect(() => {
     getInfos()
   }, [pageSize, current, stuName])
@@ -61,7 +74,7 @@ export default function MShutRes () {
           <Button onClick={() => initClick()}>返回</Button>
         </div>
         <div className={style.out_func}>
-          <Button>导出EXCEL文件</Button>
+          <Button onClick={() => clickOpenModal()}>导出EXCEL文件</Button>
         </div>
       </div>
       <div className={style.height}>
@@ -75,6 +88,8 @@ export default function MShutRes () {
           }
         </Table>
       </div>
+      <Modal open={isModal} onCancel={() => closeModal()}>
+      </Modal>
     </>
   )
 }

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { Button, Input, message } from 'antd'
 import { changePassword, getSelfInfo, repairStudentPassword } from '../../../../api/admin'
+import { useNavigate } from 'react-router-dom'
 
 export default function BasicInfo () {
+  const navigator = useNavigate()
   // 保存修改密码
   const [password, setPassword] = useState<string>()
   // 保存老师姓名
@@ -18,8 +20,10 @@ export default function BasicInfo () {
     if (id && password) {
       const res = await changePassword(id, password)
       if (typeof res !== 'undefined') {
-        message.success('密码修改成功')
+        message.success('密码修改成功!请重新登录')
         setPassword('')
+        localStorage.clear()
+        navigator('/adminLogin')
       }
     } else if (!password) {
       message.info('密码不为空')

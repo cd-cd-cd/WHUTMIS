@@ -33,13 +33,14 @@ export default function Home ({ role, menuData, logoutApi }: Props) {
     // Because of no response to judge
     if (typeof res !== 'undefined') {
       message.success('退出成功')
-    }
-    if (role === 0) {
-      navigator('/mainLogin')
-    } else if (role === -1) {
-      navigator('/adminLogin')
-    } else {
-      navigator('/404')
+      localStorage.clear()
+      if (role === 0) {
+        navigator('/mainLogin')
+      } else if (role === -1) {
+        navigator('/adminLogin')
+      } else {
+        navigator('/404')
+      }
     }
   }
 
