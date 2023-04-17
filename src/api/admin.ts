@@ -13,3 +13,40 @@ export const getSelfInfo = async (id: string) => {
     method: 'GET'
   })
 }
+
+// 设置管理员密码
+export const changePassword = async (id: string, password: string) => {
+  return await request({
+    url: '/new/admin/changePassword',
+    method: 'POST',
+    params: {
+      id,
+      password
+    }
+  })
+}
+
+// 重置学生密码
+export const repairStudentPassword = async (studentId: string) => {
+  return await request({
+    url: '/new/admin/repairStudentPassword',
+    method: 'POST',
+    params: {
+      studentId
+    }
+  })
+}
+
+// 学生搜索（搜索、页面、未提交名单是同一个入口
+export const studentBaseInfo = async (studentName: string, isNotSubmit: boolean, page: number, pageLen: number) => {
+  return await request<string>({
+    url: '/new/admin/studentBaseInfo',
+    method: 'POST',
+    params: {
+      studentName,
+      isNotSubmit,
+      page,
+      pageLen
+    }
+  })
+}

@@ -7,6 +7,7 @@ import Column from 'antd/lib/table/Column'
 import { type IColumnData, type IStuBasicInfo } from '../../../../libs/model'
 
 export default function MStuInfo () {
+  const [loading, setLoading] = useState(false)
   const [total, setTotal] = useState<number>(0)
   const [current, setCurrent] = useState(1)
   const [pageSize, setPageSize] = useState(20)
@@ -20,6 +21,7 @@ export default function MStuInfo () {
   }
 
   const getBasicInfos = async () => {
+    setLoading(true)
     const res = await stuBasicInfo(stuName, current, pageSize)
     if (res) {
       // 注意后端传的是json string 而且需要将‘ 转为 “ 否则会报错
@@ -27,6 +29,7 @@ export default function MStuInfo () {
       setInfoList(temp.columnList)
       setColumnData(temp.columnData)
       setTotal(temp.total)
+      setLoading(false)
     }
   }
 
@@ -72,6 +75,7 @@ export default function MStuInfo () {
       </div>
       <div className={style.height}>
         <Table
+          loading={loading}
           dataSource={infoList}
           pagination={paginationProps}
         >

@@ -1,16 +1,96 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { Button, Col, Row, Select } from 'antd'
+import { getScore } from '../../../api/student'
+const testData: INode[] = [
+  {
+    label: '会计学',
+    value: 'accountancy',
+    children: [
+      {
+        label: '大数据会计',
+        value: 'bigDataAccount',
+        children: [
+          {
+            label: '大数据会计1',
+            value: 'one'
+          },
+          {
+            label: '大数据会计1',
+            value: 'two'
+          }
+        ]
+      },
+      {
+        label: '管理会计',
+        value: 'managementAccount'
+      }
+    ]
+  },
+  {
+    label: '工商管理',
+    value: 'businessAdministration'
+  },
+  {
+    label: '财务管理',
+    value: 'financialManagement',
+    children: [
+      {
+        label: '智能财务',
+        value: 'intelligentFinance'
+      },
+      {
+        label: '公司金融',
+        value: 'corporateFinance'
+      }
+    ]
+  }
+]
+
+interface INode {
+  label: string
+  value: string
+  children?: INode[]
+}
 export default function Wish () {
+  const [infoString, setInfoString] = useState<string>('')
+  const render = (data: INode[]) => {
+    // eslint-disable-next-line no-unreachable-loop
+    for (const temp of data) {
+      console.log(temp, data)
+      if (temp.children) {
+        return <>
+          <div>{temp.label}</div>
+          <div>{render(temp.children)}</div>
+        </>
+      } else {
+        return <div key={temp.value}>{temp.label}</div>
+      }
+    }
+  }
+
+  const getInfo = async () => {
+    const id = localStorage.getItem('username')
+    if (id) {
+      const res = await getScore(id)
+      if (res) {
+        setInfoString(res)
+      }
+    }
+  }
+
+  useEffect(() => {
+    getInfo()
+  }, [])
   return (
     <div>
       <div className={style.showBoard}>
         <div className={style.title}>志愿选择</div>
         <div className={style.selfInfo}>
           <Row>
-            <Col className={style.col} span={8}>成绩：29.498</Col>
-            <Col className={style.col} span={8}>附加分：0.3</Col>
-            <Col className={style.col} span={8}>总分：29.798</Col>
+            {
+              infoString.split('    ').slice(0, 3).map(item => <Col key={item} className={style.col} span={8}>{item}</Col>)
+            }
           </Row>
         </div>
         <div className={style.label}>

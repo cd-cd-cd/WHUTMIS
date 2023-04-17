@@ -21,11 +21,3 @@ export interface ITableData {
   major: string
   num: number
 }
-
-export const majorTableData: ITableData[] = [
-  { key: 0, major: '信管', num: 40 },
-  { key: 1, major: '信管', num: 40 },
-  { key: 2, major: '信管', num: 40 },
-  { key: 3, major: '信管', num: 40 },
-  { key: 4, major: '信管', num: 40 }
-]

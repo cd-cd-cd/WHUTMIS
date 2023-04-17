@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.label{
+.label {
   font-weight: 700;
   color: dimgray;
   margin-right: 5px;
@@ -16,11 +16,25 @@
   margin: 3px 10px;
 }
 
-.out_func{
+.out_func {
   display: flex;
   margin-right: 20px;
 }
 
-.outBtn{
+.outBtn {
   margin-left: 5px;
+}
+
+.height {
+  :global {
+    .ant-table-tbody>tr>td {
+      padding: 14px 14px;
+      text-align: center;
+    }
+
+    .ant-table-thead>tr>th {
+      padding: 10px;
+      text-align: center;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import { Button, Input } from 'antd'
-import { getSelfInfo } from '../../../../api/admin'
+import { Button, Input, message } from 'antd'
+import { changePassword, getSelfInfo, repairStudentPassword } from '../../../../api/admin'
 
 export default function BasicInfo () {
   // 保存修改密码
@@ -13,7 +13,17 @@ export default function BasicInfo () {
   const [username, setUsername] = useState('')
 
   // 修改管理员密码
-  const changePasswordClick = () => {
+  const changePasswordClick = async () => {
+    const id = localStorage.getItem('id')
+    if (id && password) {
+      const res = await changePassword(id, password)
+      if (typeof res !== 'undefined') {
+        message.success('密码修改成功')
+        setPassword('')
+      }
+    } else if (!password) {
+      message.info('密码不为空')
+    }
   }
 
   // 基本信息
@@ -26,8 +36,16 @@ export default function BasicInfo () {
   }
 
   // 初始化学生密码
-  const initStuPassword = () => {
-
+  const initStuPassword = async () => {
+    if (username) {
+      const res = await repairStudentPassword(username)
+      if (typeof res !== 'undefined') {
+        message.success('该学生密码初始化成功')
+        setUsername('')
+      }
+    } else {
+      message.info('学号不为空')
+    }
   }
 
   useEffect(() => {

@@ -1,26 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import { Button, Descriptions, Input } from 'antd'
+import { Button, Descriptions, Input, message } from 'antd'
 import useValidator from '../../../hooks/useValidator'
+import { baseInfo, changePasswordApi } from '../../../api/student'
 
 export default function StudentHome () {
   const [password, setPassword] = useState('')
+  const [infoString, setInfoString] = useState('')
   const { mainPasswordValidator } = useValidator()
-  const changePassword = () => {
+  const changePassword = async () => {
     if (mainPasswordValidator(password)) {
-      console.log('yes')
+      const id = localStorage.getItem('username')
+      if (id && password) {
+        const res = await changePasswordApi(id, password)
+        if (typeof res !== 'undefined') {
+          message.success('密码修改成功')
+          setPassword('')
+        }
+      }
     }
   }
+
+  const getBaseInfo = async () => {
+    const id = localStorage.getItem('username')
+    if (id) {
+      const res = await baseInfo(id)
+      if (res) {
+        setInfoString(res)
+      }
+    }
+  }
+
+  useEffect(() => {
+    getBaseInfo()
+  }, [])
   return (
     <div>
       <div className={style.showBoard}>
         <div className={style.title}>基本信息</div>
         <Descriptions column={2} title={null} className={style.info}>
-          <Descriptions.Item label="姓名">测试524</Descriptions.Item>
-          <Descriptions.Item label="性别">男</Descriptions.Item>
-          <Descriptions.Item label="年级">1999级</Descriptions.Item>
-          <Descriptions.Item label="学号">0129903920524</Descriptions.Item>
-          <Descriptions.Item label="班级">工商类9901</Descriptions.Item>
+          {
+            infoString.split('\n').map(item => <Descriptions.Item key={item}>{item}</Descriptions.Item>)
+          }
         </Descriptions>
       </div>
       <div className={style.showBoard}>

@@ -57,3 +57,91 @@ export const studentWishInfo = async (studentName: string, isNotSubmit: boolean,
     }
   })
 }
+
+// 修改学生成绩
+export const changeStudentScore = async (studentId: string, baseScore: number, extraScore: number) => {
+  return await request({
+    url: '/new/main/changeStudentScore',
+    method: 'POST',
+    params: {
+      studentId,
+      baseScore,
+      extraScore
+    }
+  })
+}
+
+// 取消学生志愿提交
+export const repairStudentSubmit = async (studentId: string) => {
+  return await request({
+    url: '/new/main/repairStudentSubmit',
+    method: 'POST',
+    params: {
+      studentId
+    }
+  })
+}
+
+// 修改系统时间
+export const changeSystemTime = async (startTime: string, endTime: string) => {
+  return await request({
+    url: '/new/main/changeSystemTime',
+    method: 'POST',
+    params: {
+      startTime,
+      endTime
+    }
+  })
+}
+
+export interface IResGetTime {
+  startTime: string
+  endTime: string
+}
+
+// 获取系统时间
+export const getTime = async () => {
+  return await request<IResGetTime>({
+    url: '/new/main/getTime',
+    method: 'POST'
+  })
+}
+
+export interface IGetDepartmentInfo {
+  departmentName: string
+  groupId: number
+  studentCount: number
+}
+
+// 获取专业与人数信息
+export const getDepartmentInfo = async () => {
+  return await request<IGetDepartmentInfo[]>({
+    url: '/new/main/getDepartmentInfo',
+    method: 'POST'
+  })
+}
+
+// 修改专业人数
+export const changeDepartment = async (departmentName: string, studentNumber: number) => {
+  return await request({
+    url: '/new/main/changeDepartment',
+    method: 'POST',
+    params: {
+      departmentName,
+      studentNumber
+    }
+  })
+}
+
+// 学生搜索（整合了页面功能）
+export const wishResult = async (studentName: string, page: number, pageLen: number) => {
+  return await request<string>({
+    url: '/new/main/wishResult',
+    method: 'POST',
+    params: {
+      studentName,
+      page,
+      pageLen
+    }
+  })
+}

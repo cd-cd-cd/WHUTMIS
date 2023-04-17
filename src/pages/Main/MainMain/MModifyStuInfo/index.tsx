@@ -1,11 +1,37 @@
 import React, { useState } from 'react'
 import style from './index.module.scss'
-import { Button, Form, Input, InputNumber } from 'antd'
+import { Button, Form, Input, InputNumber, message } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
+import { changeStudentScore, repairStudentSubmit } from '../../../../api/main'
+interface IChangeScore {
+  studentId: string
+  baseScore: number
+  extraScore: number
+}
 export default function MModifyStuInfo () {
   const [form] = useForm()
   // 记录取消学生志愿提交
   const [username, setUsername] = useState('')
+
+  const changeScore = async (values: IChangeScore) => {
+    const res = await changeStudentScore(values.studentId, values.baseScore, values.extraScore)
+    if (typeof res !== 'undefined') {
+      message.success('学生成绩修改成功')
+      form.resetFields()
+    }
+  }
+
+  const cancelWish = async () => {
+    if (!username) {
+      message.info('学号不为空')
+    } else {
+      const res = await repairStudentSubmit(username.trim())
+      if (typeof res !== 'undefined') {
+        message.success('取消志愿成功')
+        setUsername('')
+      }
+    }
+  }
   return (
     <div className={style.back}>
       <div className={style.box}>
@@ -13,6 +39,7 @@ export default function MModifyStuInfo () {
         <div className={style.main}>
           <div className={style.funBox}>
             <Form
+              onFinish={changeScore}
               form={form}
               labelAlign='left'
               labelCol={{ span: 6 }}
@@ -68,7 +95,7 @@ export default function MModifyStuInfo () {
               onChange={(e) => setUsername(e.target.value.trim())}
               value={username}
             ></Input>
-            <Button>确定</Button>
+            <Button onClick={() => cancelWish()}>确定</Button>
           </div>
         </div>
       </div>

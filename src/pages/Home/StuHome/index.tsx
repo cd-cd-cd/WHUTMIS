@@ -3,8 +3,9 @@ import stuLogo from '../../../assets/imgs/stu_logo_top.png'
 import textLogo from '../../../assets/imgs/text.png'
 import logout from '../../../assets/imgs/logout.png'
 import style from './index.module.scss'
-import { Menu, type MenuProps } from 'antd'
+import { Menu, message, type MenuProps } from 'antd'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { exist } from '../../../api/student'
 
 export default function StuHome () {
   const [current, setCurrent] = useState('home')
@@ -19,6 +20,18 @@ export default function StuHome () {
       key: 'wish'
     }
   ]
+
+  const logoutApi = async () => {
+    const id = localStorage.getItem('username')
+    if (id) {
+      const res = await exist(id)
+      if (typeof res !== 'undefined') {
+        message.success('退出成功')
+        localStorage.clear()
+        navigator('/studentLogin')
+      }
+    }
+  }
   useEffect(() => {
     navigator(`/student/${current}`)
   }, [current])
@@ -27,7 +40,7 @@ export default function StuHome () {
       <header className={style.header}>
         <div className={style.top}>
           <div className={style.logout_text}>测试524</div>
-          <img src={logout} className={style.logoutIcon}></img>
+          <img src={logout} className={style.logoutIcon} onClick={() => logoutApi()}></img>
         </div>
         <div className={style.logo_box}>
           <img src={stuLogo} className={style.logo}></img>
