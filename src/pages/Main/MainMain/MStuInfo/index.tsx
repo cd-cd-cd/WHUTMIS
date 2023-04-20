@@ -60,9 +60,9 @@ export default function MStuInfo () {
   }
 
   const beforeUpload = (file: RcFile) => {
-    const isTypeTrue = file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    const isTypeTrue = file.type === 'application/vnd.ms-excel'
     if (!isTypeTrue) {
-      message.error(`${file.name} 文件只能为xls/xlsx格式`)
+      message.error(`${file.name} 文件只能为xls格式`)
     } else {
       setFile(file)
     }
@@ -71,7 +71,9 @@ export default function MStuInfo () {
 
   const clickInputExcel = async () => {
     if (file) {
-      const res = await inputExcel(file)
+      const data = new FormData()
+      data.append('excel', file)
+      const res = await inputExcel(data)
       if (typeof res !== 'undefined') {
         message.success('上传成功')
         closeModal()
@@ -111,7 +113,7 @@ export default function MStuInfo () {
         <Upload
             showUploadList={false}
             beforeUpload={beforeUpload}
-            accept='.xls, .xlsx'
+            accept='.xls'
             customRequest={() => { }}
           >
             <Button icon={<UploadOutlined />}>选择文件</Button>

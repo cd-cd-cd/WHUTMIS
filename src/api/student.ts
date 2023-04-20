@@ -1,3 +1,4 @@
+import { type IStudentTime } from '../libs/model'
 import request from '../utils/request'
 
 // 基本信息
@@ -50,5 +51,58 @@ export const getWishInfo = async () => {
   return await request<string>({
     url: '/new/student/getWishInfo',
     method: 'POST'
+  })
+}
+
+// 获取系统时间
+export const getStudentTime = async () => {
+  return await request<IStudentTime>({
+    url: '/new/student/getTime',
+    method: 'POST'
+  })
+}
+
+// 保存志愿
+export const saveWish = async (id: string, wish: string) => {
+  return await request({
+    url: '/new/student/saveWish',
+    method: 'POST',
+    params: {
+      id,
+      wish
+    }
+  })
+}
+
+// 已保存志愿获取
+export const getSaveWish = async (id: string) => {
+  return await request<string>({
+    url: '/new/student/getSaveWish',
+    method: 'POST',
+    params: {
+      id
+    }
+  })
+}
+
+// 提交志愿
+export const submit = async (id: string) => {
+  return await request({
+    url: '/new/student/submit',
+    method: 'POST',
+    params: {
+      id
+    }
+  })
+}
+
+// 获取提交状态
+export const getSubmitState = async (id: string) => {
+  return await request<string>({
+    url: '/new/student/getSubmitState',
+    method: 'POST',
+    params: {
+      id
+    }
   })
 }

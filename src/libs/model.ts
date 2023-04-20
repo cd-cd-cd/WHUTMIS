@@ -30,6 +30,11 @@ interface INode {
 }
 
 export interface IGetWhish {
-  noBaseCount: number
+  BaseCount: number
   wishTree: INode[]
+}
+
+export interface IStudentTime {
+  startTime: string
+  endTime: string
 }

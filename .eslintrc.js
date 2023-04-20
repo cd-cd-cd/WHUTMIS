@@ -30,7 +30,8 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/await-thenable": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/restrict-plus-operands": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest",

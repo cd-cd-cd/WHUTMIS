@@ -172,15 +172,21 @@ export const outputExcel = async (keyList: CheckboxValueType[]) => {
 }
 
 // 上传Excel
-export const inputExcel = async (excel: RcFile) => {
+export const inputExcel = async (data: FormData) => {
   return await request({
     url: '/new/main/inputExcel',
     method: 'POST',
-    params: {
-      excel
-    },
+    data,
     headers: {
       'Content-Type': 'multipart/form-data'
     }
+  })
+}
+
+// 专业分流
+export const doWishDistribution = async () => {
+  return await request({
+    url: '/new/main/doWishDistribution',
+    method: 'POST'
   })
 }

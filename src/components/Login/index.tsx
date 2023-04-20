@@ -51,7 +51,7 @@ export default function Login ({ title, loginApi, role }: Props) {
           break
         case 1:
           localStorage.setItem('username', values.username)
-          navigator('/student')
+          navigator('/student/home')
           break
       }
     }

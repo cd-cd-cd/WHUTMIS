@@ -81,16 +81,18 @@
   text-align: center;
   :global{
     .ant-card-head-title {
-      padding: 10px 0;
+      padding: 8px 0;
     }
 
     .ant-card-body {
-      padding: 10px 0;
+      padding: 8px 0;
     }
 
     .ant-card-head{
       color: dimgray;
       font-weight: 700;
+      padding: 0 0;
+      font-size: 14px;
     }
   }
 }

@@ -5,11 +5,13 @@ import logout from '../../../assets/imgs/logout.png'
 import style from './index.module.scss'
 import { Menu, message, type MenuProps } from 'antd'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { exist } from '../../../api/student'
+import { exist, getStudentTime } from '../../../api/student'
+import { type IStudentTime } from '../../../libs/model'
 
 export default function StuHome () {
   const [current, setCurrent] = useState('home')
   const navigator = useNavigate()
+  const [time, setTime] = useState<IStudentTime>()
   const items: MenuProps['items'] = [
     {
       label: '首页',
@@ -32,9 +34,20 @@ export default function StuHome () {
       }
     }
   }
+
+  const getTime = async () => {
+    const res = await getStudentTime()
+    if (res) {
+      setTime(res)
+    }
+  }
   useEffect(() => {
     navigator(`/student/${current}`)
   }, [current])
+
+  useEffect(() => {
+    getTime()
+  }, [])
   return (
     <div className={style.back}>
       <header className={style.header}>
@@ -47,7 +60,7 @@ export default function StuHome () {
           <img src={textLogo} className={style.textLogo}></img>
         </div>
         <Menu onClick={(e) => setCurrent(e.key)} selectedKeys={[current]} mode="horizontal" items={items} />
-        <div className={style.warnText}>(请注意，志愿申请的时间为： 2022-04-26 22:11:16 ---- 2022-04-30 22:10:43)</div>
+        <div className={style.warnText}>{`(请注意，志愿申请的时间为： ${time?.startTime.replace('.0', '')} ---- ${time?.endTime.replace('.0', '')})`}</div>
       </header>
       <main>
         <Outlet/>

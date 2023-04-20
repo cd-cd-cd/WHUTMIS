@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Navigate, Route, Routes, useNavigate, useRoutes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import AdminLogin from './pages/Login/MainLogin'
 import SuperLogin from './pages/Login/AdminLogin'
 import StudentLogin from './pages/Login/StudentLogin'
@@ -20,11 +20,11 @@ import StuHome from './pages/Home/StuHome'
 import StudentHome from './pages/Student/StudentHome'
 import Wish from './pages/Student/Wish'
 import { type ITabBarCommon } from './libs/model'
+import MDC from './pages/Main/MainMain/MDC'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
   const [tabBarId, setTabBarId] = useState(0)
-  const navigator = useNavigate()
   useEffect(() => {
     document.title = '武汉理工大学专业分流系统'
   }, [])
@@ -48,6 +48,7 @@ function App () {
             <Route path='MModifyStuInfo' element={<MModifyStuInfo />}></Route>
             <Route path='MShutSetting' element={<MShutSetting />}></Route>
             <Route path='MShutRes' element={<MShutRes />}></Route>
+            <Route path='MDC' element={<MDC/>}></Route>
           </Route>
           <Route path='admin' element={localStorage.getItem('token') ? <AdminHome/> : <SuperLogin />}>
             <Route path='basicInfo' element={<BasicInfo/>}></Route>

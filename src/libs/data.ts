@@ -7,7 +7,8 @@ export const mainMenu: ITabBarCommon[] = [
   { label: '学生志愿信息', value: 2, name: 'MVolunteerInfo' },
   { label: '修改学生信息', value: 3, name: 'MModifyStuInfo' },
   { label: '专业分流设置', value: 4, name: 'MShutSetting' },
-  { label: '专业分流结果', value: 5, name: 'MShutRes' }
+  { label: '专业分流结果', value: 5, name: 'MShutRes' },
+  { label: '数据中心', value: 6, name: 'MDC' }
 ]
 
 // adminMenuData
@@ -25,4 +26,5 @@ export interface ITableData {
 export interface IRenderValue {
   title: string
   value: string
+  label: string
 }
