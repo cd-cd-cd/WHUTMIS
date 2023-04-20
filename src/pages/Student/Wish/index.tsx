@@ -1,71 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { type ReactNode, useEffect, useState } from 'react'
+import './index.css'
 import style from './index.module.scss'
-import { Button, Col, Row, Select } from 'antd'
-import { getScore } from '../../../api/student'
-const testData: INode[] = [
-  {
-    label: '会计学',
-    value: 'accountancy',
-    children: [
-      {
-        label: '大数据会计',
-        value: 'bigDataAccount',
-        children: [
-          {
-            label: '大数据会计1',
-            value: 'one'
-          },
-          {
-            label: '大数据会计1',
-            value: 'two'
-          }
-        ]
-      },
-      {
-        label: '管理会计',
-        value: 'managementAccount'
-      }
-    ]
-  },
-  {
-    label: '工商管理',
-    value: 'businessAdministration'
-  },
-  {
-    label: '财务管理',
-    value: 'financialManagement',
-    children: [
-      {
-        label: '智能财务',
-        value: 'intelligentFinance'
-      },
-      {
-        label: '公司金融',
-        value: 'corporateFinance'
-      }
-    ]
-  }
-]
-
-interface INode {
-  label: string
-  value: string
-  children?: INode[]
-}
+import { Button, Card, Col, List, Row, TreeSelect, message } from 'antd'
+import { getScore, getWishInfo } from '../../../api/student'
+import { DownOutlined } from '@ant-design/icons'
+import { type IRenderValue } from '../../../libs/data'
+import { type IGetWhish } from '../../../libs/model'
 export default function Wish () {
   const [infoString, setInfoString] = useState<string>('')
-  const render = (data: INode[]) => {
-    // eslint-disable-next-line no-unreachable-loop
-    for (const temp of data) {
-      console.log(temp, data)
-      if (temp.children) {
-        return <>
-          <div>{temp.label}</div>
-          <div>{render(temp.children)}</div>
-        </>
-      } else {
-        return <div key={temp.value}>{temp.label}</div>
-      }
+  const [value, setValue] = useState<string>()
+  const [renderValue, setRenderValue] = useState<IRenderValue[]>([])
+  const [getWish, setGetWish] = useState<IGetWhish>()
+
+  const getWishInfoClick = async () => {
+    const res = await getWishInfo()
+    if (res) {
+      const temp = res.replace(/'/g, '"')
+      setGetWish(JSON.parse(temp))
     }
   }
 
@@ -79,9 +30,28 @@ export default function Wish () {
     }
   }
 
+  const saveClick = async () => {
+    if (value?.length !== getWish?.noBaseCount) {
+      message.info('志愿未选全')
+    }
+  }
+
   useEffect(() => {
     getInfo()
+    getWishInfoClick()
   }, [])
+
+  const onChange = (newValue: string) => {
+    setValue(newValue)
+    const temp: IRenderValue[] = (newValue as unknown as string[]).reduce((pre: IRenderValue[], cur, index) => {
+      pre.push({
+        title: `第${index + 1}志愿`,
+        value: cur
+      })
+      return pre
+    }, [])
+    setRenderValue(temp)
+  }
   return (
     <div>
       <div className={style.showBoard}>
@@ -93,80 +63,39 @@ export default function Wish () {
             }
           </Row>
         </div>
-        <div className={style.label}>
-          <Row>
-            <Col className={style.col} span={8}>专业</Col>
-            <Col className={style.col} span={8}>方向</Col>
-            <Col className={style.col} span={8}>班级</Col>
-          </Row>
-        </div>
-        <div className={style.major_box}>
-          <div className={style.firstLevel}>
-            <Row gutter={[8, 8]}>
-              <Col span={3} className={style.label}>会计学：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-              <Col span={3} className={style.label}>大数据会计：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-              <Col span={3} className={style.label}>大数据会计1：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-              <Col span={3} className={style.label}></Col>
-              <Col span={5}></Col>
-              <Col span={3} className={style.label}></Col>
-              <Col span={5}></Col>
-              <Col span={3} className={style.label}>大数据会计2：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-              <Col span={3} className={style.label}></Col>
-              <Col span={5}></Col>
-              <Col span={3} className={style.label}>管理会计：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-              <Col span={3} className={style.label}></Col>
-              <Col span={5}></Col>
-            </Row>
-          </div>
-          <div className={style.firstLevel}>
-            <Row gutter={[8, 8]}>
-              <Col span={3} className={style.label}>工商管理：</Col>
-              <Col span={5}><Select className={style.select} /></Col>
-            </Row>
-          </div>
-        </div>
-        <div className={style.firstLevel}>
-          <Row gutter={[8, 8]}>
-            <Col span={3} className={style.label}>财务管理：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-            <Col span={3} className={style.label}>智能财务：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-            <Col span={3} offset={8} className={style.label}>公司金融：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-          </Row>
-        </div>
-        <div className={style.firstLevel}>
-          <Row gutter={[8, 8]}>
-            <Col span={3} className={style.label}>人力资源管理：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-          </Row>
-        </div>
-        <div className={style.firstLevel}>
-          <Row gutter={[8, 8]}>
-            <Col span={3} className={style.label}>市场营销：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-            <Col span={3} className={style.label}>数字营销：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-            <Col span={3} offset={8} className={style.label}>产业营销：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-          </Row>
-        </div>
-        <div className={style.firstLevel}>
-          <Row gutter={[8, 8]}>
-            <Col span={3} className={style.label}>会计管理：</Col>
-            <Col span={5}><Select className={style.select} /></Col>
-          </Row>
+        {
+          renderValue.length
+            ? <div className={style.showBox}>
+                <List
+                  grid={{ gutter: 0, column: 6 }}
+                  dataSource={renderValue}
+                  renderItem={item => (
+                    <List.Item className={style.listItem}>
+                      <Card title={item.title}>{item.value}</Card>
+                    </List.Item>
+                  )}
+                />
+              </div>
+            : ''
+        }
+        <div className={style.treeBox}>
+          <TreeSelect
+            style={{ width: '100%' }}
+            switcherIcon={<DownOutlined />}
+            showCheckedStrategy="SHOW_ALL"
+            onChange={onChange}
+            treeData={getWish?.wishTree}
+            treeDefaultExpandAll={true}
+            value={value}
+            allowClear
+            multiple
+          />
         </div>
         <div className={style.bottom}>
           <div className={style.warn_text}>提示: 选择志愿后，请点击保存。保存后，如有修改，需再次点击保存。</div>
           <div className={style.btn_box}>
-            <Button>保存</Button>
-            <Button danger type='primary'>重置</Button>
+            <Button onClick={() => saveClick()}>保存</Button>
+            <Button danger type='primary' onClick={() => { setValue(undefined); setRenderValue([]) }}>重置</Button>
           </div>
         </div>
       </div>

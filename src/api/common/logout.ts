@@ -4,7 +4,7 @@ import request from '../../utils/request'
 // admin logout
 export const adminLogout = async (id: string | null) => {
   return await request({
-    url: '/admin/logout',
+    url: '/new/admin/logout',
     method: 'POST',
     params: {
       id

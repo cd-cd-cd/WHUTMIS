@@ -72,3 +72,25 @@
 .text_box{
   display: flex;
 }
+
+.showBox{
+  margin: 5px auto 0 auto;
+}
+
+.listItem{
+  text-align: center;
+  :global{
+    .ant-card-head-title {
+      padding: 10px 0;
+    }
+
+    .ant-card-body {
+      padding: 10px 0;
+    }
+
+    .ant-card-head{
+      color: dimgray;
+      font-weight: 700;
+    }
+  }
+}

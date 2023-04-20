@@ -50,3 +50,15 @@ export const studentBaseInfo = async (studentName: string, isNotSubmit: boolean,
     }
   })
 }
+
+// 未提交名单增加导出功能（字段的确认
+export const getNotSubmitList = async () => {
+  return await request<BlobPart>({
+    url: '/new/admin/getNotSubmitList',
+    responseType: 'blob',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    method: 'POST'
+  })
+}

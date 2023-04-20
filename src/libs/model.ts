@@ -21,3 +21,15 @@ export interface IStuBasicInfo {
   columnList: any[]
   columnData: IColumnData[]
 }
+
+interface INode {
+  value: string
+  title: string
+  disabled?: boolean
+  children?: INode[]
+}
+
+export interface IGetWhish {
+  noBaseCount: number
+  wishTree: INode[]
+}

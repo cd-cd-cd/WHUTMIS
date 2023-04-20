@@ -1,4 +1,6 @@
+import { type CheckboxValueType } from 'antd/lib/checkbox/Group'
 import request from '../utils/request'
+import { type RcFile } from 'antd/lib/upload'
 
 // 设置本账号新密码
 export const changePassword = async (data: FormData) => {
@@ -148,8 +150,37 @@ export const wishResult = async (studentName: string, page: number, pageLen: num
 
 // 获取自选字段
 export const getKey = async () => {
-  return await request({
+  return await request<string[]>({
     url: '/new/main/getKey',
     method: 'POST'
+  })
+}
+
+// 导出Excel文件
+export const outputExcel = async (keyList: CheckboxValueType[]) => {
+  return await request<BlobPart>({
+    url: '/new/main/outputExcel',
+    method: 'POST',
+    responseType: 'blob',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    params: {
+      keyList: keyList.join(',')
+    }
+  })
+}
+
+// 上传Excel
+export const inputExcel = async (excel: RcFile) => {
+  return await request({
+    url: '/new/main/inputExcel',
+    method: 'POST',
+    params: {
+      excel
+    },
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   })
 }

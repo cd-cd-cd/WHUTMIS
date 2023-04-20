@@ -94,7 +94,6 @@ export default function MVolunteerInfo () {
           ? <Button onClick={() => unsubmitted()}>点击显示未提交名单</Button>
           : ''
           }
-        <Button className={style.outBtn} disabled={isAll}>导出未提交名单</Button>
       </div>
     </div>
     <div className={style.height}>

@@ -38,6 +38,7 @@ function handleErrorCode (status: number, msg: string) {
   switch (status) {
     case 401: {
       message.error(msg)
+      localStorage.clear()
       return Promise.reject(status)
     }
     case 400:

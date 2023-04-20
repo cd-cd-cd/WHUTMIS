@@ -3,10 +3,12 @@ import style from './index.module.scss'
 import { Button, Input, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import { type IStuBasicInfo } from '../../../../libs/model'
-import { studentBaseInfo } from '../../../../api/admin'
+import { getNotSubmitList, studentBaseInfo } from '../../../../api/admin'
+import Mask from '../../../../components/Mask'
 
 export default function StuInfo () {
   const [loading, setLoading] = useState(false)
+  const [isMask, setIsMask] = useState(false)
   const [total, setTotal] = useState<number>(0)
   const [current, setCurrent] = useState(1)
   const [pageSize, setPageSize] = useState(20)
@@ -48,6 +50,21 @@ export default function StuInfo () {
     seIsAll(true)
   }
 
+  // 导出未提交名单
+  const clickOutput = async () => {
+    setIsMask(true)
+    const res = await getNotSubmitList()
+    if (res) {
+      const a = document.createElement('a')
+      const blob = new Blob([res], { type: 'application/vnd.ms-excel' })
+      const url = URL.createObjectURL(blob)
+      a.setAttribute('href', url)
+      a.setAttribute('download', '未提交名单')
+      a.click()
+    }
+    setIsMask(false)
+  }
+
   // 得到infoList
   const getBasicInfos = async () => {
     setLoading(true)
@@ -80,6 +97,9 @@ export default function StuInfo () {
   }, [stuName, current, pageSize, isAll])
   return (
     <>
+    {
+      isMask ? <Mask></Mask> : ''
+    }
     <div className={style.func_box}>
       <div className={style.searchBox}>
         <span className={style.label}>姓名：</span>
@@ -95,7 +115,7 @@ export default function StuInfo () {
           ? <Button onClick={() => unsubmitted()}>点击显示未提交名单</Button>
           : ''
         }
-        <Button className={style.outBtn} disabled={isAll}>导出未提交名单</Button>
+        <Button className={style.outBtn} disabled={isAll} onClick={() => clickOutput()}>导出未提交名单</Button>
       </div>
     </div>
     <div className={style.height}>

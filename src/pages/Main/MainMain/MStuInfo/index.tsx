@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import { Button, Input, Table, Upload } from 'antd'
+import { Button, Image, Input, Modal, Table, Upload, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
-import { stuBasicInfo } from '../../../../api/main'
+import excelImg from '../../../../assets/imgs/excel.png'
+import { inputExcel, stuBasicInfo } from '../../../../api/main'
 import Column from 'antd/lib/table/Column'
 import { type IColumnData, type IStuBasicInfo } from '../../../../libs/model'
+import { type RcFile } from 'antd/lib/upload'
 
 export default function MStuInfo () {
+  const [file, setFile] = useState<RcFile>()
+  const [isModal, setIsModal] = useState(false)
   const [loading, setLoading] = useState(false)
   const [total, setTotal] = useState<number>(0)
   const [current, setCurrent] = useState(1)
@@ -46,8 +50,37 @@ export default function MStuInfo () {
     }
   }
 
+  const closeModal = () => {
+    setIsModal(false)
+    setFile(undefined)
+  }
+
   const initClick = () => {
     setStuName('')
+  }
+
+  const beforeUpload = (file: RcFile) => {
+    const isTypeTrue = file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    if (!isTypeTrue) {
+      message.error(`${file.name} 文件只能为xls/xlsx格式`)
+    } else {
+      setFile(file)
+    }
+    return isTypeTrue
+  }
+
+  const clickInputExcel = async () => {
+    if (file) {
+      const res = await inputExcel(file)
+      if (typeof res !== 'undefined') {
+        message.success('上传成功')
+        closeModal()
+        setCurrent(1)
+        setPageSize(20)
+      }
+    } else {
+      message.info('请上传文件')
+    }
   }
 
   useEffect(() => {
@@ -62,17 +95,30 @@ export default function MStuInfo () {
           <Button onClick={() => initClick()}>返回</Button>
         </div>
         <div className={style.file_func}>
-          <Upload
+          <Button onClick={() => setIsModal(true)}>选择文件上传</Button>
+        </div>
+      </div>
+      <Modal
+      title='上传excel文件'
+      width={500}
+      open={isModal}
+      onOk={() => clickInputExcel()}
+      onCancel={() => closeModal()}
+      >
+        <Image src={excelImg} width={450}></Image>
+        <div className={style.modalText}>提示：上传excel表格第一行为列名，请按照列名填写学生信息</div>
+        <div className={style.uploadline}>
+        <Upload
             showUploadList={false}
-            // beforeUpload={beforeUpload}
-            accept='.excel'
+            beforeUpload={beforeUpload}
+            accept='.xls, .xlsx'
             customRequest={() => { }}
           >
             <Button icon={<UploadOutlined />}>选择文件</Button>
           </Upload>
-          <Button>立即上传</Button>
-        </div>
-      </div>
+          <span className={style.fileName}>{file?.name}</span>
+          </div>
+      </Modal>
       <div className={style.height}>
         <Table
           loading={loading}

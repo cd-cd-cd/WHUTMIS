@@ -44,3 +44,11 @@ export const getScore = async (id: string) => {
     }
   })
 }
+
+// 专业志愿获取（只有专业信息用来选择志愿
+export const getWishInfo = async () => {
+  return await request<string>({
+    url: '/new/student/getWishInfo',
+    method: 'POST'
+  })
+}

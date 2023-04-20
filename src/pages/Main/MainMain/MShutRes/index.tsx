@@ -1,9 +1,11 @@
-import { Button, Input, Modal, Table } from 'antd'
+import { Button, Checkbox, Input, Modal, Table, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { type IStuBasicInfo, type IColumnData } from '../../../../libs/model'
 import Column from 'antd/lib/table/Column'
-import { getKey, wishResult } from '../../../../api/main'
+import { getKey, outputExcel, wishResult } from '../../../../api/main'
+import { type CheckboxValueType } from 'antd/lib/checkbox/Group'
+import Mask from '../../../../components/Mask'
 
 export default function MShutRes () {
   const [loading, setLoading] = useState(false)
@@ -14,6 +16,10 @@ export default function MShutRes () {
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<IColumnData[]>([])
   const [isModal, setIsModal] = useState(false)
+  const [plainOptions, setPlainOptions] = useState<string[]>([])
+  const [outValues, setOutValues] = useState<CheckboxValueType[]>([])
+  // 控制mask
+  const [maskLoading, setMaskLoading] = useState(false)
   const onSearch = async (value: string) => {
     setCurrent(1)
     setPageSize(20)
@@ -52,14 +58,39 @@ export default function MShutRes () {
 
   const clickOpenModal = async () => {
     setIsModal(true)
-    // const res = await getKey()
-    // if (res) {
-    //   console.log(res)
-    // }
+    const res = await getKey()
+    if (res) {
+      setPlainOptions(res)
+    }
   }
 
   const closeModal = () => {
     setIsModal(false)
+    setOutValues([])
+  }
+
+  const onChange = (checkedValues: CheckboxValueType[]) => {
+    setOutValues(checkedValues)
+  }
+
+  const clickExcel = async () => {
+    if (!outValues.length) {
+      message.info('请选择字段')
+    } else {
+      setMaskLoading(true)
+      const res = await outputExcel(outValues)
+      if (res) {
+        const a = document.createElement('a')
+        const blob = new Blob([res], { type: 'application/vnd.ms-excel' })
+        const url = URL.createObjectURL(blob)
+        a.setAttribute('href', url)
+        a.setAttribute('download', '专业分流结果自选表')
+        a.click()
+      }
+      setMaskLoading(false)
+      setOutValues([])
+      setIsModal(false)
+    }
   }
 
   useEffect(() => {
@@ -88,7 +119,10 @@ export default function MShutRes () {
           }
         </Table>
       </div>
-      <Modal open={isModal} onCancel={() => closeModal()}>
+        <Modal title='导出excel文件' onOk={() => clickExcel()} open={isModal} onCancel={() => closeModal()}>
+        { maskLoading ? <Mask></Mask> : '' }
+        <div className={style.text}>选择自选字段</div>
+        <Checkbox.Group value={outValues} options={plainOptions} onChange={onChange} />
       </Modal>
     </>
   )

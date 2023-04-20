@@ -21,3 +21,8 @@ export interface ITableData {
   major: string
   num: number
 }
+
+export interface IRenderValue {
+  title: string
+  value: string
+}
