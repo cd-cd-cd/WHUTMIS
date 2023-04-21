@@ -1,0 +1,19 @@
+.height {
+  margin: 10px;
+  :global {
+    .ant-table-tbody>tr>td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    .ant-table-thead>tr>th {
+      padding: 8px;
+      text-align: center;
+    }
+  }
+}
+
+.table1 {
+  width: 90%;
+  margin-bottom: 10px;
+}

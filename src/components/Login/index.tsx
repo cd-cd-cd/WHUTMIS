@@ -43,11 +43,11 @@ export default function Login ({ title, loginApi, role }: Props) {
       switch (role) {
         case -1:
           localStorage.setItem('id', values.username)
-          navigator('/admin')
+          navigator('/admin/basicInfo')
           break
         case 0:
           localStorage.setItem('id', values.username)
-          navigator('/main')
+          navigator('/main/MBasicInfo')
           break
         case 1:
           localStorage.setItem('username', values.username)

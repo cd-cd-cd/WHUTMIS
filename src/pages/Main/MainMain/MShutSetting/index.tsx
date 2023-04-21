@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { Button, DatePicker, InputNumber, Modal, Table, message } from 'antd'
 import Column from 'antd/lib/table/Column'
-import { type IResGetTime, getTime, changeSystemTime, getDepartmentInfo, type IGetDepartmentInfo, changeDepartment } from '../../../../api/main'
+import { type IResGetTime, getTime, changeSystemTime, getDepartmentInfo, type IGetDepartmentInfo, changeDepartment, doWishDistribution } from '../../../../api/main'
 import { type RangePickerProps } from 'antd/lib/date-picker'
 import dayjs from 'dayjs'
+import Mask from '../../../../components/Mask'
 
 export default function MShutSetting () {
+  const [maskLoading, setMaskLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [editMajorInfo, setEditMajorInfo] = useState<IGetDepartmentInfo>()
   const [editNumber, setEditNumber] = useState<number | null>()
@@ -76,6 +78,15 @@ export default function MShutSetting () {
     }
   }
 
+  const wishDistributionClick = async () => {
+    setMaskLoading(true)
+    const res = await doWishDistribution()
+    if (typeof res !== 'undefined') {
+      message.success('分流成功')
+      setMaskLoading(false)
+    }
+  }
+
   useEffect(() => {
     getTimeClick()
     departmentInfo()
@@ -85,8 +96,11 @@ export default function MShutSetting () {
       <div className={style.box}>
         <div className={style.title_text}>开始分流</div>
         <div className={style.main}>
+          {
+            maskLoading ? <Mask /> : ''
+          }
           <div className={style.funBox}>
-            <Button>专业分流</Button>
+            <Button onClick={() => wishDistributionClick()}>专业分流</Button>
             <span className={style.warnText}>提示：时间截止学生填写完毕后，再点击此按钮进行专业分流</span>
           </div>
         </div>
