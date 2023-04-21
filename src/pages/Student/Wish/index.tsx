@@ -38,7 +38,6 @@ export default function Wish () {
   }
 
   const saveClick = async () => {
-    console.log(value?.length, getWish?.BaseCount)
     if (value?.length !== getWish?.BaseCount) {
       message.info('志愿未选全')
     } else {

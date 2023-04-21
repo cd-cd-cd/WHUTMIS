@@ -14,7 +14,8 @@ export const mainMenu: ITabBarCommon[] = [
 // adminMenuData
 export const adminMenu: ITabBarCommon[] = [
   { label: '基本信息', value: 0, name: 'basicInfo' },
-  { label: '学生基本志愿', value: 1, name: 'stuInfo' }
+  { label: '学生基本志愿', value: 1, name: 'stuInfo' },
+  { label: '数据中心', value: 2, name: 'DC' }
 ]
 
 export interface ITableData {

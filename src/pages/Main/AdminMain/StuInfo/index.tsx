@@ -5,6 +5,7 @@ import Column from 'antd/lib/table/Column'
 import { type IStuBasicInfo } from '../../../../libs/model'
 import { getNotSubmitList, studentBaseInfo } from '../../../../api/admin'
 import Mask from '../../../../components/Mask'
+import useExcel from '../../../../hooks/useExcel'
 
 export default function StuInfo () {
   const [loading, setLoading] = useState(false)
@@ -17,6 +18,7 @@ export default function StuInfo () {
   const [showName, setShowName] = useState('')
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<any[]>([])
+  const { outputFileExcel } = useExcel()
 
   // 初始化pagination
   const initPagination = () => {
@@ -55,12 +57,7 @@ export default function StuInfo () {
     setIsMask(true)
     const res = await getNotSubmitList()
     if (res) {
-      const a = document.createElement('a')
-      const blob = new Blob([res], { type: 'application/vnd.ms-excel' })
-      const url = URL.createObjectURL(blob)
-      a.setAttribute('href', url)
-      a.setAttribute('download', '未提交名单')
-      a.click()
+      outputFileExcel(res, '未提交名单')
     }
     setIsMask(false)
   }

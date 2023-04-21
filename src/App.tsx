@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AdminLogin from './pages/Login/MainLogin'
 import SuperLogin from './pages/Login/AdminLogin'
 import StudentLogin from './pages/Login/StudentLogin'
@@ -21,6 +21,7 @@ import StudentHome from './pages/Student/StudentHome'
 import Wish from './pages/Student/Wish'
 import { type ITabBarCommon } from './libs/model'
 import MDC from './pages/Main/MainMain/MDC'
+import DC from './pages/Main/AdminMain/DC'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
@@ -37,6 +38,7 @@ function App () {
       setTabBarId
     }}
     >
+      <BrowserRouter>
         <Routes>
           <Route path='/mainLogin' element={<AdminLogin />}></Route>
           <Route path='/adminLogin' element={<SuperLogin />}></Route>
@@ -53,6 +55,7 @@ function App () {
           <Route path='admin' element={localStorage.getItem('token') ? <AdminHome/> : <SuperLogin />}>
             <Route path='basicInfo' element={<BasicInfo/>}></Route>
             <Route path='stuInfo' element={<StuInfo/>}></Route>
+            <Route path='DC' element={<DC/>}></Route>
           </Route>
           <Route path='student' element={localStorage.getItem('token') ? <StuHome/> : <StudentLogin />}>
             <Route path='home' element={<StudentHome/>}></Route>
@@ -60,6 +63,7 @@ function App () {
           </Route>
           <Route path='/404' element={<Unknown/>}></Route>
         </Routes>
+        </BrowserRouter>
     </StoreProvider>
   )
 }

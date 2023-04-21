@@ -206,3 +206,15 @@ export const admitData = async () => {
     method: 'POST'
   })
 }
+
+// 数据中心 excel
+export const mdcExcel = async () => {
+  return await request<BlobPart>({
+    url: '/new/main/dataOutputExcel',
+    method: 'POST',
+    responseType: 'blob',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  })
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import { admitData, mdcExcel, wishData } from '../../../../api/main'
 import { type IStuBasicInfo } from '../../../../libs/model'
+import { admitData, dcExcel, wishData } from '../../../../api/admin'
 import { Button, Table, message } from 'antd'
 import Column from 'antd/lib/table/Column'
 import useExcel from '../../../../hooks/useExcel'
 
-export default function MDC () {
+export default function DC () {
   const [dataAdmit, setDataAdmit] = useState<IStuBasicInfo>()
   const [dataWish, setDataWish] = useState<IStuBasicInfo>()
   const [loading1, setLoading1] = useState(false)
@@ -18,8 +18,8 @@ export default function MDC () {
     const res = await wishData()
     if (res) {
       setDataWish(JSON.parse(res.replace(/'/g, '"')))
+      setLoading2(false)
     }
-    setLoading2(false)
   }
 
   const getAdmitData = async () => {
@@ -28,15 +28,14 @@ export default function MDC () {
     if (res) {
       const temp: IStuBasicInfo = JSON.parse(res.replace(/'/g, '"'))
       setDataAdmit(temp)
+      setLoading1(false)
     }
-    setLoading1(false)
   }
 
   const outPut = async () => {
     setLoading1(true)
     setLoading2(true)
-    const res = await mdcExcel()
-    console.log(res)
+    const res = await dcExcel()
     if (res) {
       outputFileExcel(res, '数据中心')
     }
@@ -52,25 +51,25 @@ export default function MDC () {
     <div className={style.height}>
       <Button className={style.btn} onClick={() => outPut()}>输出EXCEL</Button>
       <Table
-        className={style.table1}
-        loading={loading2}
-        dataSource={dataWish?.columnList}
-        pagination={false}
-      >
-        {
-          dataWish?.columnData.map(item => <Column title={item.title} dataIndex={item.key} key={item.key} />)
-        }
-      </Table>
+          className={style.table1}
+          loading={loading2}
+          dataSource={dataWish?.columnList}
+          pagination={false}
+        >
+          {
+            dataWish?.columnData.map(item => <Column title={item.title} dataIndex={item.key} key={item.key} />)
+          }
+        </Table>
       <Table
-        className={style.table1}
-        loading={loading1}
-        dataSource={dataAdmit?.columnList}
-        pagination={false}
-      >
-        {
-          dataAdmit?.columnData.map(item => <Column title={item.title} dataIndex={item.key} key={item.key} />)
-        }
-      </Table>
+          className={style.table1}
+          loading={loading1}
+          dataSource={dataAdmit?.columnList}
+          pagination={false}
+        >
+          {
+            dataAdmit?.columnData.map(item => <Column title={item.title} dataIndex={item.key} key={item.key} />)
+          }
+        </Table>
     </div>
   )
 }

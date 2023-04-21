@@ -62,3 +62,31 @@ export const getNotSubmitList = async () => {
     method: 'POST'
   })
 }
+
+// 关于专业（方向）分流数据分析和可视化（第一志愿人数，录取最高、最低排位）（可选做
+export const wishData = async () => {
+  return await request<string>({
+    url: '/new/admin/wishData',
+    method: 'POST'
+  })
+}
+
+// 各个专业（方向）在不同志愿的录取情况分析（可选做
+export const admitData = async () => {
+  return await request<string>({
+    url: '/new/admin/admitData',
+    method: 'POST'
+  })
+}
+
+// 数据中心 excel
+export const dcExcel = async () => {
+  return await request<BlobPart>({
+    url: '/new/admin/dataOutputExcel',
+    method: 'POST',
+    responseType: 'blob',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  })
+}

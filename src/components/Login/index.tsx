@@ -39,15 +39,15 @@ export default function Login ({ title, loginApi, role }: Props) {
     if (res) {
       const token = res
       localStorage.setItem('token', token)
-      message.success('登陆成功!')
+      message.success('登陆成功')
       switch (role) {
         case -1:
           localStorage.setItem('id', values.username)
-          navigator('/admin/basicInfo')
+          navigator('/admin')
           break
         case 0:
           localStorage.setItem('id', values.username)
-          navigator('/main/MBasicInfo')
+          navigator('/main')
           break
         case 1:
           localStorage.setItem('username', values.username)
@@ -120,14 +120,14 @@ export default function Login ({ title, loginApi, role }: Props) {
                   <a onClick={() => getIdentifyCode()}>刷新</a>
                 </div>
               </Form.Item>
-                <div className={style.btn_box}>
-                  <Button type="primary" htmlType="submit">
-                    确认
-                  </Button>
-                  <Button htmlType="button" onClick={() => form.resetFields()}>
-                    取消
-                  </Button>
-                </div>
+              <div className={style.btn_box}>
+                <Button type="primary" htmlType="submit">
+                  确认
+                </Button>
+                <Button htmlType="button" onClick={() => form.resetFields()}>
+                  取消
+                </Button>
+              </div>
             </Form>
           </div>
         </div>

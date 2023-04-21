@@ -108,7 +108,8 @@ export default function MStuInfo () {
       onCancel={() => closeModal()}
       >
         <Image src={excelImg} width={450}></Image>
-        <div className={style.modalText}>提示：上传excel表格第一行为列名，请按照列名填写学生信息</div>
+        <div className={style.modalText}>提示1：上传excel表格第一行为列名，请严格按照列名填写学生信息</div>
+        <div className={style.modalText}>提示2：请上传xls格式文件</div>
         <div className={style.uploadline}>
         <Upload
             showUploadList={false}

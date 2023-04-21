@@ -6,6 +6,7 @@ import Column from 'antd/lib/table/Column'
 import { getKey, outputExcel, wishResult } from '../../../../api/main'
 import { type CheckboxValueType } from 'antd/lib/checkbox/Group'
 import Mask from '../../../../components/Mask'
+import useExcel from '../../../../hooks/useExcel'
 
 export default function MShutRes () {
   const [loading, setLoading] = useState(false)
@@ -18,6 +19,7 @@ export default function MShutRes () {
   const [isModal, setIsModal] = useState(false)
   const [plainOptions, setPlainOptions] = useState<string[]>([])
   const [outValues, setOutValues] = useState<CheckboxValueType[]>([])
+  const { outputFileExcel } = useExcel()
   // 控制mask
   const [maskLoading, setMaskLoading] = useState(false)
   const onSearch = async (value: string) => {
@@ -80,12 +82,7 @@ export default function MShutRes () {
       setMaskLoading(true)
       const res = await outputExcel(outValues)
       if (res) {
-        const a = document.createElement('a')
-        const blob = new Blob([res], { type: 'application/vnd.ms-excel' })
-        const url = URL.createObjectURL(blob)
-        a.setAttribute('href', url)
-        a.setAttribute('download', '专业分流结果自选表')
-        a.click()
+        outputFileExcel(res, '专业分流结果自选表')
       }
       setMaskLoading(false)
       setOutValues([])
@@ -123,6 +120,10 @@ export default function MShutRes () {
         { maskLoading ? <Mask></Mask> : '' }
         <div className={style.text}>选择自选字段</div>
         <Checkbox.Group value={outValues} options={plainOptions} onChange={onChange} />
+        <div className={style.btn_box}>
+          <Button size='small' onClick={() => setOutValues(plainOptions)}>全选</Button>
+          <Button size='small' onClick={() => setOutValues([])}>重置</Button>
+        </div>
       </Modal>
     </>
   )

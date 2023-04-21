@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { mainMenu } from '../../../libs/data'
 import Home from '../../../components/Home'
 import { mainLogout } from '../../../api/common/logout'
