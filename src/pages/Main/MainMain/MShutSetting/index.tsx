@@ -6,8 +6,10 @@ import { type IResGetTime, getTime, changeSystemTime, getDepartmentInfo, type IG
 import { type RangePickerProps } from 'antd/lib/date-picker'
 import dayjs from 'dayjs'
 import Mask from '../../../../components/Mask'
+import { useNavigate } from 'react-router-dom'
 
 export default function MShutSetting () {
+  const navigator = useNavigate()
   const [maskLoading, setMaskLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [editMajorInfo, setEditMajorInfo] = useState<IGetDepartmentInfo>()
@@ -90,6 +92,13 @@ export default function MShutSetting () {
   useEffect(() => {
     getTimeClick()
     departmentInfo()
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
   }, [])
   return (
     <div className={style.back}>

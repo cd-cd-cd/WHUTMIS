@@ -6,6 +6,7 @@ import { getSaveWish, getScore, getSubmitState, getWishInfo, saveWish, submit } 
 import { DownOutlined } from '@ant-design/icons'
 import { type IRenderValue } from '../../../libs/data'
 import { type IGetWhish } from '../../../libs/model'
+import { useNavigate } from 'react-router-dom'
 
 interface IRenderSaveWish {
   title: string
@@ -18,6 +19,7 @@ export default function Wish () {
   const [renderValue, setRenderValue] = useState<IRenderValue[]>([])
   const [getWish, setGetWish] = useState<IGetWhish>()
   const [saveWishInfo, setSaveWishInfo] = useState<IRenderSaveWish[]>([])
+  const navigator = useNavigate()
 
   const getWishInfoClick = async () => {
     const res = await getWishInfo()
@@ -103,6 +105,13 @@ export default function Wish () {
     }, [])
     setRenderValue(temp)
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/studentLogin')
+    }
+  }, [])
   return (
     <div>
       <div className={style.showBoard}>

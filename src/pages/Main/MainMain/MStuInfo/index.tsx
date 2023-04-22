@@ -7,6 +7,7 @@ import { inputExcel, stuBasicInfo } from '../../../../api/main'
 import Column from 'antd/lib/table/Column'
 import { type IColumnData, type IStuBasicInfo } from '../../../../libs/model'
 import { type RcFile } from 'antd/lib/upload'
+import { useNavigate } from 'react-router-dom'
 
 export default function MStuInfo () {
   const [file, setFile] = useState<RcFile>()
@@ -18,6 +19,7 @@ export default function MStuInfo () {
   const [stuName, setStuName] = useState('')
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<IColumnData[]>([])
+  const navigator = useNavigate()
   const onSearch = async (value: string) => {
     setCurrent(1)
     setPageSize(20)
@@ -88,6 +90,13 @@ export default function MStuInfo () {
   useEffect(() => {
     getBasicInfos()
   }, [pageSize, current, stuName])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
+  }, [])
   return (
     <div>
       <div className={style.func_box}>

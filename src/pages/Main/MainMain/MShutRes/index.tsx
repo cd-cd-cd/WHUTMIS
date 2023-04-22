@@ -7,6 +7,7 @@ import { getKey, outputExcel, wishResult } from '../../../../api/main'
 import { type CheckboxValueType } from 'antd/lib/checkbox/Group'
 import Mask from '../../../../components/Mask'
 import useExcel from '../../../../hooks/useExcel'
+import { useNavigate } from 'react-router-dom'
 
 export default function MShutRes () {
   const [loading, setLoading] = useState(false)
@@ -20,6 +21,7 @@ export default function MShutRes () {
   const [plainOptions, setPlainOptions] = useState<string[]>([])
   const [outValues, setOutValues] = useState<CheckboxValueType[]>([])
   const { outputFileExcel } = useExcel()
+  const navigator = useNavigate()
   // 控制mask
   const [maskLoading, setMaskLoading] = useState(false)
   const onSearch = async (value: string) => {
@@ -93,6 +95,13 @@ export default function MShutRes () {
   useEffect(() => {
     getInfos()
   }, [pageSize, current, stuName])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
+  }, [])
   return (
     <>
       <div className={style.func_box}>

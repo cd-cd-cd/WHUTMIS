@@ -6,6 +6,7 @@ import { type IStuBasicInfo } from '../../../../libs/model'
 import { getNotSubmitList, studentBaseInfo } from '../../../../api/admin'
 import Mask from '../../../../components/Mask'
 import useExcel from '../../../../hooks/useExcel'
+import { useNavigate } from 'react-router-dom'
 
 export default function StuInfo () {
   const [loading, setLoading] = useState(false)
@@ -19,6 +20,7 @@ export default function StuInfo () {
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<any[]>([])
   const { outputFileExcel } = useExcel()
+  const navigator = useNavigate()
 
   // 初始化pagination
   const initPagination = () => {
@@ -92,6 +94,13 @@ export default function StuInfo () {
   useEffect(() => {
     getBasicInfos()
   }, [stuName, current, pageSize, isAll])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/adminLogin')
+    }
+  }, [])
   return (
     <>
     {

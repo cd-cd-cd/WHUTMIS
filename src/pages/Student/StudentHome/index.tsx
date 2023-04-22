@@ -3,11 +3,14 @@ import style from './index.module.scss'
 import { Button, Descriptions, Input, message } from 'antd'
 import useValidator from '../../../hooks/useValidator'
 import { baseInfo, changePasswordApi } from '../../../api/student'
+import { useNavigate } from 'react-router-dom'
 
 export default function StudentHome () {
   const [password, setPassword] = useState('')
   const [infoString, setInfoString] = useState('')
   const { mainPasswordValidator } = useValidator()
+  const navigator = useNavigate()
+
   const changePassword = async () => {
     if (mainPasswordValidator(password)) {
       const id = localStorage.getItem('username')
@@ -33,6 +36,13 @@ export default function StudentHome () {
 
   useEffect(() => {
     getBaseInfo()
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/studentLogin')
+    }
   }, [])
   return (
     <div>

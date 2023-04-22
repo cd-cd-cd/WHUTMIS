@@ -43,7 +43,7 @@ function App () {
           <Route path='/mainLogin' element={<AdminLogin />}></Route>
           <Route path='/adminLogin' element={<SuperLogin />}></Route>
           <Route path='/studentLogin' element={<StudentLogin />}></Route>
-          <Route path='main' element={localStorage.getItem('token') ? <MainHome /> : <AdminLogin />}>
+          <Route path='main' element={<MainHome />}>
             <Route path='MBasicInfo' element={<MBasicInfo />}></Route>
             <Route path='MStuInfo' element={<MStuInfo />}></Route>
             <Route path='MVolunteerInfo' element={<MVolunteerInfo />}></Route>
@@ -52,12 +52,12 @@ function App () {
             <Route path='MShutRes' element={<MShutRes />}></Route>
             <Route path='MDC' element={<MDC/>}></Route>
           </Route>
-          <Route path='admin' element={localStorage.getItem('token') ? <AdminHome/> : <SuperLogin />}>
+          <Route path='admin' element={<AdminHome/>}>
             <Route path='basicInfo' element={<BasicInfo/>}></Route>
             <Route path='stuInfo' element={<StuInfo/>}></Route>
             <Route path='DC' element={<DC/>}></Route>
           </Route>
-          <Route path='student' element={localStorage.getItem('token') ? <StuHome/> : <StudentLogin />}>
+          <Route path='student' element={<StuHome/>}>
             <Route path='home' element={<StudentHome/>}></Route>
             <Route path='wish' element={<Wish/>}></Route>
           </Route>

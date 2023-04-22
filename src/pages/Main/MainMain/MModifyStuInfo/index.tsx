@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import { Button, Form, Input, InputNumber, message } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import { changeStudentScore, repairStudentSubmit } from '../../../../api/main'
+import { useNavigate } from 'react-router-dom'
 interface IChangeScore {
   studentId: string
   baseScore: number
@@ -10,6 +11,7 @@ interface IChangeScore {
 }
 export default function MModifyStuInfo () {
   const [form] = useForm()
+  const navigator = useNavigate()
   // 记录取消学生志愿提交
   const [username, setUsername] = useState('')
 
@@ -32,6 +34,13 @@ export default function MModifyStuInfo () {
       }
     }
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
+  }, [])
   return (
     <div className={style.back}>
       <div className={style.box}>

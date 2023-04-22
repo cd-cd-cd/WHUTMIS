@@ -4,6 +4,7 @@ import { Button, Input, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import { type IStuBasicInfo } from '../../../../libs/model'
 import { studentWishInfo } from '../../../../api/main'
+import { useNavigate } from 'react-router-dom'
 
 export default function MVolunteerInfo () {
   const [loading, setLoading] = useState(false)
@@ -15,6 +16,7 @@ export default function MVolunteerInfo () {
   const [showName, setShowName] = useState('')
   const [infoList, setInfoList] = useState<any[]>()
   const [columnData, setColumnData] = useState<any[]>([])
+  const navigator = useNavigate()
   // 初始化pagination
   const initPagination = () => {
     setCurrent(1)
@@ -77,6 +79,13 @@ export default function MVolunteerInfo () {
   useEffect(() => {
     getBasicInfos()
   }, [stuName, current, pageSize, isAll])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
+  }, [])
   return (
     <>
     <div className={style.func_box}>

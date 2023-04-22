@@ -5,6 +5,7 @@ import { type IStuBasicInfo } from '../../../../libs/model'
 import { Button, Table, message } from 'antd'
 import Column from 'antd/lib/table/Column'
 import useExcel from '../../../../hooks/useExcel'
+import { useNavigate } from 'react-router-dom'
 
 export default function MDC () {
   const [dataAdmit, setDataAdmit] = useState<IStuBasicInfo>()
@@ -12,6 +13,7 @@ export default function MDC () {
   const [loading1, setLoading1] = useState(false)
   const [loading2, setLoading2] = useState(false)
   const { outputFileExcel } = useExcel()
+  const navigator = useNavigate()
 
   const getWishData = async () => {
     setLoading2(true)
@@ -47,6 +49,13 @@ export default function MDC () {
   useEffect(() => {
     getWishData()
     getAdmitData()
+  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
   }, [])
   return (
     <div className={style.height}>

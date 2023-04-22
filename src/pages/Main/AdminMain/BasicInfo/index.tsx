@@ -55,6 +55,13 @@ export default function BasicInfo () {
   useEffect(() => {
     getSelf()
   }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/adminLogin')
+    }
+  }, [])
   return (
     <div className={style.back}>
       <div className={style.box}>

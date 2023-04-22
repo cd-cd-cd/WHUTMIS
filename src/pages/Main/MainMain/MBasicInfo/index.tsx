@@ -59,6 +59,13 @@ export default function MBasicInfo () {
     }
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigator('/mainLogin')
+    }
+  }, [])
+
   return (
     <div className={style.back}>
       <div className={style.box}>
