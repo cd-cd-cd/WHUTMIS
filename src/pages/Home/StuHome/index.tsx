@@ -27,11 +27,14 @@ export default function StuHome () {
     const id = localStorage.getItem('username')
     if (id) {
       const res = await exist(id)
+      console.log(res)
       if (typeof res !== 'undefined') {
         message.success('退出成功')
         localStorage.clear()
         navigator('/studentLogin')
       }
+    } else {
+      navigator('/studentLogin')
     }
   }
 
@@ -52,7 +55,7 @@ export default function StuHome () {
     <div className={style.back}>
       <header className={style.header}>
         <div className={style.top}>
-          <div className={style.logout_text}>测试524</div>
+          <div className={style.logout_text}></div>
           <img src={logout} className={style.logoutIcon} onClick={() => logoutApi()}></img>
         </div>
         <div className={style.logo_box}>
