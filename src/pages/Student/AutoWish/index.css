@@ -1,0 +1,59 @@
+.wishTableHeadRow {
+  display: flex;
+  height: 50px;
+  width: 100%;
+}
+
+.labelCSS {
+  width: 90px;
+  margin-right: 10px;
+  text-align: end;
+  color: dimgray;
+}
+
+.wishTableHeadCol {
+  text-align: center;
+  color: gray;
+  font-weight: 700;
+}
+
+.wishTableRow {
+  float: left;
+  width: 100%;
+  background-color: var(--major-back-color);
+  margin-bottom: 10px;
+}
+
+.wishTableCol {
+  height: 100%;
+  float: left;
+}
+
+.wishTableRowGap {
+  width: 100%;
+  height: 1px;
+  float: left;
+}
+
+.wishTableColGap {
+  height: 100%;
+  width: 1px;
+  float: left;
+}
+
+.wishTableWishDiv {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 40px;
+}
+
+.option {
+  color: dimgray;
+}
+
+.placeholder {
+  color: dimgray;
+}

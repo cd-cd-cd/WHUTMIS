@@ -15,6 +15,7 @@
     "axios": "^0.27.2",
     "dayjs": "^1.11.7",
     "http-proxy-middleware": "^2.0.6",
+    "layui": "^2.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",

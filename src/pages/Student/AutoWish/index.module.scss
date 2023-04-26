@@ -1,0 +1,100 @@
+.showBoard{
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.title{
+  font-weight: 700;
+  color: var(--board-title-color);
+}
+
+.selfInfo{
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.nav_col{
+  text-align: center;
+  color: dimgray;
+  font-weight: 700;
+}
+
+.label{
+  margin-top: 5px;
+}
+
+.major_box{
+  width: 100%;
+}
+
+.firstLevel{
+  background-color: var(--major-back-color);
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.select{
+  // width: 190px;
+  width: 90%;
+}
+
+.label{
+  text-align: end;
+  align-items: center;
+  padding-right: 10px;
+  color: dimgray;
+}
+
+.bottom {
+  align-items: center;
+}
+
+.warn_text{
+  padding: 20px 0 10px 0;
+  color: var(--warn-color);
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn_box{
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.saveBottom{
+  align-items: center;
+  text-align: center;
+}
+
+.text_box{
+  display: flex;
+}
+
+.showBox{
+  margin: 5px auto 0 auto;
+}
+
+.listItem{
+  text-align: center;
+  :global{
+    .ant-card-head-title {
+      padding: 8px 0;
+    }
+
+    .ant-card-body {
+      padding: 8px 0;
+    }
+
+    .ant-card-head{
+      color: dimgray;
+      font-weight: 700;
+      padding: 0 0;
+      font-size: 14px;
+    }
+  }
+}

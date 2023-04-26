@@ -22,6 +22,7 @@ import Wish from './pages/Student/Wish'
 import { type ITabBarCommon } from './libs/model'
 import MDC from './pages/Main/MainMain/MDC'
 import DC from './pages/Main/AdminMain/DC'
+import AutoWish from './pages/Student/AutoWish'
 
 function App () {
   const [tabBarList, setTabBarList] = useState<ITabBarCommon[]>([])
@@ -59,7 +60,7 @@ function App () {
           </Route>
           <Route path='student' element={<StuHome/>}>
             <Route path='home' element={<StudentHome/>}></Route>
-            <Route path='wish' element={<Wish/>}></Route>
+            <Route path='wish' element={<AutoWish/>}></Route>
           </Route>
           <Route path='/404' element={<Unknown/>}></Route>
         </Routes>
