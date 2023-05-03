@@ -3,7 +3,7 @@ import { type ITabBarCommon } from './model'
 // main menuData
 export const mainMenu: ITabBarCommon[] = [
   { label: '基本信息', value: 0, name: 'MBasicInfo' },
-  { label: '学生基本志愿', value: 1, name: 'MStuInfo' },
+  { label: '学生基本信息', value: 1, name: 'MStuInfo' },
   { label: '学生志愿信息', value: 2, name: 'MVolunteerInfo' },
   { label: '修改学生信息', value: 3, name: 'MModifyStuInfo' },
   { label: '专业分流设置', value: 4, name: 'MShutSetting' },
@@ -14,7 +14,7 @@ export const mainMenu: ITabBarCommon[] = [
 // adminMenuData
 export const adminMenu: ITabBarCommon[] = [
   { label: '基本信息', value: 0, name: 'basicInfo' },
-  { label: '学生基本志愿', value: 1, name: 'stuInfo' },
+  { label: '学生基本信息', value: 1, name: 'stuInfo' },
   { label: '数据中心', value: 2, name: 'DC' }
 ]
 
