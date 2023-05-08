@@ -27,7 +27,6 @@ export default function StuHome () {
     const id = localStorage.getItem('username')
     if (id) {
       const res = await exist(id)
-      console.log(res)
       if (typeof res !== 'undefined') {
         message.success('退出成功')
         localStorage.clear()

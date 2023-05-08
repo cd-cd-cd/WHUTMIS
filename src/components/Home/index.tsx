@@ -31,7 +31,6 @@ export default function Home ({ role, menuData, logoutApi }: Props) {
     const id = localStorage.getItem('id')
     const res = await logoutApi(id)
     // Because of no response to judge
-    console.log(res)
     if (typeof res !== 'undefined') {
       message.success('退出成功')
     }

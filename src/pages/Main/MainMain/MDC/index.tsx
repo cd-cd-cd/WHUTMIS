@@ -38,7 +38,6 @@ export default function MDC () {
     setLoading1(true)
     setLoading2(true)
     const res = await mdcExcel()
-    console.log(res)
     if (res) {
       outputFileExcel(res, '数据中心')
     }

@@ -77,7 +77,9 @@ export default function MStuInfo () {
       data.append('excel', file)
       const res = await inputExcel(data)
       if (typeof res !== 'undefined') {
-        message.success('上传成功')
+        if (res) {
+          message.info(res as string)
+        }
         closeModal()
         setCurrent(1)
         setPageSize(20)
