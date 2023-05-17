@@ -120,7 +120,7 @@ export default function MShutSetting () {
           <div className={style.funBox}>
             <span className={style.timeLabel}>选择时间：</span>
             <DatePicker.RangePicker
-              format="YYYY-MM-DD HH:mm:ss"
+              showTime
               onChange={onChange}
               value={time}
             />
